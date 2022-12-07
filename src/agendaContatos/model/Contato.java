@@ -12,4 +12,5 @@ public class Contato {
     private List<Telefone> telefones;
     private List<Endereco> enderecos;
 
+
 }
