@@ -26,7 +26,7 @@ public class App {
         System.out.println(lista.size());
 
 
-        Endereco mariaEnde = new Endereco(TipoEndereco.Residencial, "Brasil", "55555000");
+       /* Endereco mariaEnde = new Endereco(TipoEndereco.Residencial, "Brasil", "55555000");
         mariaEnde.setLogradouro("Rua dos Jardins");
         mariaEnde.setNumero("224");
         mariaEnde.setCidade("João Pessoa");
@@ -38,8 +38,8 @@ public class App {
         mariaTel.setDdi("+55");
         mariaTel.setDdd("83");
         mariaTel.setNumero("988888888");
-
-
+*/
+/*
         System.out.println("Contato Maria: " + maria);
         System.out.println("Contato Maria: " + mariaEnde);
         System.out.println("Contato Maria: " + mariaTel);
@@ -48,5 +48,5 @@ public class App {
         System.out.println("|" + mariaTel.getTelefoneCompleto() + "|");
         System.out.println("|" + mariaEnde.getEnderecoCompleto() + "|");
 
-    }
+    }*/
 }
