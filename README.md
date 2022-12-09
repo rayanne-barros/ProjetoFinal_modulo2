@@ -1,4 +1,5 @@
-# Projeto 2 JAVA POO Módulo 1 - Santander Coders, da Let's Code Ada.  
+# Projeto 2 JAVA POO Módulo 1
+## Santander Coders, da Let's Code Ada.  
 
 ## Integrantes do grupo
 <ul>
