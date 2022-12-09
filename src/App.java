@@ -8,8 +8,10 @@ import agendaContatos.model.Telefone;
 import agendaContatos.ui.AgendaUI;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class App {
+
     public static void main(String[] args) {
 
         AgendaUI agendaui = new AgendaUI();
@@ -48,5 +50,5 @@ public class App {
         System.out.println("|" + mariaTel.getTelefoneCompleto() + "|");
         System.out.println("|" + mariaEnde.getEnderecoCompleto() + "|");
 
-    }*/
+    */}
 }

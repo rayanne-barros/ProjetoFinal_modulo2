@@ -1,5 +1,6 @@
 package agendaContatos.controll;
 
+import agendaContatos.enums.TipoContato;
 import agendaContatos.model.Contato;
 
 import java.util.ArrayList;
@@ -11,6 +12,10 @@ public class Agenda {
     public Agenda() {
         this.contatos = new ArrayList<>();
     }
+
+
+
+
 
     public void adicionar(Contato contato) {
         contatos.add(contato);

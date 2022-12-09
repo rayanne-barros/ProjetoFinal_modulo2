@@ -1,9 +1,12 @@
 package agendaContatos.model;
 
+import agendaContatos.controll.Agenda;
 import agendaContatos.enums.TipoContato;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Contato {
     private String nome;
@@ -11,11 +14,11 @@ public class Contato {
     private String email;
     private TipoContato tipo;
 
-    private List<Telefone> telefones;
-    private List<Endereco> enderecos;
+    private List<Telefone> telefones = new ArrayList<>();
+    private List<Endereco> enderecos = new ArrayList<>();
 
 
-
+//Módulo de contrutores
     public Contato(String nome, String sobrenome) {
         this(nome, sobrenome, "", TipoContato.Pessoal);
 
@@ -32,7 +35,8 @@ public class Contato {
         this(nome, sobrenome);
         this.telefones.add(telefone);
     }
-
+    public static final Scanner scan = new Scanner(System.in);
+    //Módulo getters e setters;
     public String getNome() {
         return nome;
     }
@@ -80,6 +84,24 @@ public class Contato {
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
     }
+
+  /* public void armazenaContato (String nome, String sobrenome, String email, TipoContato tipo){
+
+       System.out.println("Digite o nome do cantato: ");
+       setNome(nome = scan.nextLine());
+       System.out.println("Digite o sobrenome do cantato: ");
+       setNome(sobrenome = scan.nextLine());
+       System.out.println("Digite o email do cantato: ");
+       setNome(email = scan.nextLine());
+       System.out.println("Digite o tipo de cantato: ");
+       setNome(String.valueOf(tipo = TipoContato.valueOf(scan.nextLine())));
+
+       Contato contato = new Contato(getNome(), getSobrenome(), getEmail(), getTipo());
+
+       System.out.println(contato.nome + " | " + contato.sobrenome + " | " +
+                          contato.email + " | " + contato.tipo);
+       if (te)
+   }*/
 
     public String getNomeCompleto() {
         String valor = nome;
