@@ -7,7 +7,7 @@
 <li> Eveliny Muniz</li>
 <li> Rayanne Barros</li>
 <li> Renan Santos</li>
-<ul>
+</ul>
 
 ## Descrição
 Utilizando os conceitos de orientação à objetos, crie um sistema de agenda de contato.
