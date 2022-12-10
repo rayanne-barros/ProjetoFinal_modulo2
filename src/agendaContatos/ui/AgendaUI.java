@@ -4,7 +4,7 @@ import agendaContatos.controll.AgendaController;
 import agendaContatos.enums.TipoContato;
 import agendaContatos.enums.TipoEndereco;
 import agendaContatos.enums.TipoTelefone;
-import agendaContatos.model.Contato;
+import agendaContatos.model.Contatos;
 import agendaContatos.model.Endereco;
 import agendaContatos.model.Telefone;
 
@@ -30,24 +30,19 @@ public class AgendaUI {
             System.out.println("4- Listar contato");
             System.out.println("0 - Sair\n");
 
+            System.out.print("DIGITE SUA OPÇÃO: ");
+
             String opcao = sc.nextLine();
 
             switch (opcao) {
-                case "1" -> {
-                    adicionarContato();
-                }
-                case "2" -> {
-                    System.out.println("Pesquisou");
-                }
-                case "3" -> {
-                    System.out.println("Excluiu");
-                }
-                case "4" -> {
-                    listarContatos();
-
-                }
+                case "1" : adicionarContato(); break;
+                case "2" : listarContatos(); break;
+                case "3" : pesquisarContatos(); break;
+                case "4" : excluircontato(); break;
+                case "0" : continuar = false; break;
             }
-        } while (continuar);
+
+        }while (continuar);
     }
 
         public List<Endereco> mostrarMenuCadastroEndereco(){
@@ -149,7 +144,7 @@ public class AgendaUI {
         }
         private void adicionarContato() {
 
-            Contato contato = new Contato("","","", TipoContato.PESSOAL);
+            Contatos contato = new Contatos("","","", TipoContato.PESSOAL);
 
             System.out.print("\nDIGITE O NOME DO CONTATO: ");
             contato.setNome(sc.nextLine().trim().toUpperCase());
@@ -170,20 +165,35 @@ public class AgendaUI {
             contato.setTelefones(mostrarMenuCadastroTelefone());
 
             controller.adicionarContato(contato);
+            mostrarContato(contato);
         }
 
         private void listarContatos() {
-            controller.listarContatos(this);
-        }
-        public void mostrarContato(Contato contato){
+            System.out.println("Contatos cadastrados: ");
+            List<Contatos> lstContatosCadastrados = controller.listarContatos();
+            int index = 0;
+            for (Contatos contato : lstContatosCadastrados) {
+                Integer id = contato.getTelefones().indexOf(index);
+                System.out.println("\nIDENTIFICADOR: " + id);
+                System.out.println("\nNOME: " + contato.getNome().toUpperCase() + " " + contato.getSobrenome().toUpperCase());
+                System.out.println("E-MAIL: " + contato.getEmail().toLowerCase());
+                System.out.println("TIPO DE CONTATO: " + contato.getTipo());
+                index++;
 
-            AgendaController controller = new AgendaController();
+            }
+        }
+
+
+
+        public void mostrarContato(Contatos contato){
+
 
             System.out.println("\nNOME: " + contato.getNome().toUpperCase() + " " + contato.getSobrenome().toUpperCase());
             System.out.println("E-MAIL: " + contato.getEmail().toLowerCase());
             System.out.println("TIPO DE CONTATO: " + contato.getTipo());
 
             System.out.println("\nTelefones: \n");
+
             contato.getTelefones().stream().forEach(telefone -> {
                 Integer id = contato.getTelefones().indexOf(telefone);
                 System.out.println("\nIDENTIFICADOR: " + id);

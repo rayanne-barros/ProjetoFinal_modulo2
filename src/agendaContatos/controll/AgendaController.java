@@ -1,18 +1,20 @@
 package agendaContatos.controll;
 
 import agendaContatos.model.Agenda;
-import agendaContatos.model.Contato;
+import agendaContatos.model.Contatos;
 import agendaContatos.ui.AgendaUI;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AgendaController {
     private Agenda agenda = new Agenda();
 
-    public  void adicionarContato(Contato contato){
+    public  void adicionarContato(Contatos contato){
         agenda.addContatos(contato);
 
+    }
+    public List<Contatos> listarContatos(){
+        return agenda.getContatos();
     }
     public  void listarContatos(AgendaUI view){
         agenda.getContatos().forEach(contato ->view.mostrarContato(contato));

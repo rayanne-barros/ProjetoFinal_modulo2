@@ -3,9 +3,8 @@ package agendaContatos.model;
 import agendaContatos.enums.TipoContato;
 
 import java.util.List;
-import java.util.Objects;
 
-public class Contato {
+public class Contatos {
     private String nome;
     private String sobrenome;
     private String email;
@@ -14,7 +13,7 @@ public class Contato {
     private List<Telefone> telefones;
     private List<Endereco> enderecos;
 
-    public Contato(String nome, String sobrenome, String email, TipoContato tipo) {
+    public Contatos(String nome, String sobrenome, String email, TipoContato tipo) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;

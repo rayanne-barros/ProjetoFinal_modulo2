@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Agenda {
-    private List<Contato> contatos = new ArrayList<>();
+    private List<Contatos> contatos = new ArrayList<>();
 
-    public List<Contato> getContatos() {
+    public List<Contatos> getContatos() {
         return contatos;
     }
 
 
-    public void addContatos(Contato contato) {// FUNCAO PARA ADD CONTATO E NAO A LISTA INTEIRA
+    public void addContatos(Contatos contato) {// FUNCAO PARA ADD CONTATO E NAO A LISTA INTEIRA
         contatos.add(contato);
     }
 }
