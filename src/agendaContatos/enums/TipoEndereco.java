@@ -1,5 +1,5 @@
 package agendaContatos.enums;
 
 public enum TipoEndereco {
-    Comercial, Residencial, Parente, Vizinho
+    COMERCIAL, RESIDENCIAL, VIZINHO;
 }
