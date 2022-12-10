@@ -22,9 +22,13 @@ public class AgendaController {
 
     }
 
-//    public void excluir(Contato contato) {
-//        contatos.remove(contato);
-//    }
+    public void removerContato(Contatos contato) {
+        agenda.removerContato(contato);
+    }
+
+    public void removerTodosContatos() {
+        agenda.removerTodosContatos();
+    }
 //
 //    public List<Contato> pesquisarNome(String nome) {
 //        List<Contato> contatosEncontrados = new ArrayList<>();

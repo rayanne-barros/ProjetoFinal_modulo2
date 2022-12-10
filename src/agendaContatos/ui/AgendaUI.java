@@ -4,6 +4,7 @@ import agendaContatos.controll.AgendaController;
 import agendaContatos.enums.TipoContato;
 import agendaContatos.enums.TipoEndereco;
 import agendaContatos.enums.TipoTelefone;
+import agendaContatos.model.Agenda;
 import agendaContatos.model.Contatos;
 import agendaContatos.model.Endereco;
 import agendaContatos.model.Telefone;
@@ -38,7 +39,7 @@ public class AgendaUI {
                 case "1" : adicionarContato(); break;
                 case "2" : listarContatos(); break;
                 case "3" : pesquisarContatos(); break;
-                case "4" : excluircontato(); break;
+                case "4" : subMenuExcluir(); break;
                 case "0" : continuar = false; break;
             }
 
@@ -225,7 +226,95 @@ public class AgendaUI {
 
         }
 
-        private void excluircontato() {
+    private void excluirContato() {
+        Scanner sc = new Scanner(System.in);
+        Agenda agenda = new Agenda();
 
+        // listar contatos
+        System.out.println("Digite o ID do contato a ser excluído.");
+
+        String opcaoEscolhida = sc.nextLine();
+        Integer quantidadeOpcoes = agenda.getContatos().size();
+        String mensagem = "Digite o ID a ser digitado novamente";
+        String opcaoEscolhida1 = validarOpcoes(quantidadeOpcoes, opcaoEscolhida, mensagem);
+
+        System.out.println("Você tem certeza que deseja excluir a opção " + opcaoEscolhida1 + "? (0 - Não / 1 - Sim");
+        String opcaoNaoSim = sc.nextLine();
+        String opcaoEscolhida2 = validarOpcoes(2, opcaoNaoSim, "Você tem certeza que deseja excluir a opção "
+                + opcaoEscolhida1 + "? Digite 0 caso 'Não' e 1 caso 'Sim'.");
+
+        if (opcaoEscolhida2.equals("0")) {
+            subMenuExcluir();
+        } else if (opcaoEscolhida2.equals("1")) {
+            //    agenda.removerContato(contato); ESCOLHER CONTATO POR ID
+            //    System.out.println("O contato " + contato + " foi excluído.");
+            subMenuExcluir();
         }
+
+    }
+
+    private void excluirTodosContatos() {
+        Scanner sc = new Scanner (System.in);
+        Agenda agenda = new Agenda();
+
+        System.out.println("Você tem certeza que deseja excluir todos os contatos? (0 - Não / 1 - Sim");
+        String opcaoNaoSim = sc.nextLine();
+        String opcaoEscolhida1 = validarOpcoes(2, opcaoNaoSim, "Você tem certeza que deseja excluir todos os contatos?" +
+                " Digite 0 caso 'Não' e 1 caso 'Sim'.");
+
+        if (opcaoEscolhida1.equals("0")) {
+            subMenuExcluir();
+        } else if (opcaoEscolhida1.equals("1")) {
+            agenda.removerTodosContatos();
+            System.out.println("Todos os contatos foram excluídos!");
+            mostrarMenu();
+        }
+    }
+
+    public void subMenuExcluir() {
+        Scanner sc = new Scanner (System.in);
+        boolean continuar = true;
+        String subMenu = "";
+
+        while (continuar) {
+            System.out.println("Escolha uma opção: ");
+            subMenu = sc.nextLine();
+
+            switch (subMenu) {
+                case "1" -> {
+                    System.out.println("Excluir um contato.");
+                    continuar = false;
+                    excluirContato();
+                }
+                case "2" -> {
+                    System.out.println("Excluir todos os contatos.");
+                    continuar = false;
+                    excluirTodosContatos();
+                }
+                case "3" -> {
+                    System.out.println("Voltar ao menu.");
+                    mostrarMenu();
+                    continuar = false;
+                }
+                default -> System.out.println("Opção inválida!");
+            }
+        }
+    }
+
+    public static String validarOpcoes (Integer quantidadeOpcoes, String opcaoEscolhida, String mensagem) {
+        Scanner sc = new Scanner (System.in);
+        boolean continuar = true;
+
+        while (continuar) {
+            for (int i = 0; i < quantidadeOpcoes; i++) {
+                if (opcaoEscolhida.equals(Integer.toString(i))) {
+                    return opcaoEscolhida;
+                }
+            }
+            System.out.println("Opção inválida.");
+            System.out.println(mensagem);
+            opcaoEscolhida = sc.nextLine();
+        }
+        return "Erro. Inicie o programa novamente.";
+    }
 }

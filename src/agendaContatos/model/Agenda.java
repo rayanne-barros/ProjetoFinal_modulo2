@@ -14,4 +14,12 @@ public class Agenda {
     public void addContatos(Contatos contato) {// FUNCAO PARA ADD CONTATO E NAO A LISTA INTEIRA
         contatos.add(contato);
     }
+
+    public void removerContato(Contatos contato) {
+        this.contatos.remove(contato);
+    }
+
+    public void removerTodosContatos() {
+        this.contatos.removeAll(contatos);
+    }
 }
