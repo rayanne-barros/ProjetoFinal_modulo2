@@ -47,6 +47,8 @@ public class App {
         System.out.println("|" + maria.getNomeCompleto() + "|");
         System.out.println("|" + mariaTel.getTelefoneCompleto() + "|");
         System.out.println("|" + mariaEnde.getEnderecoCompleto() + "|");
+*/
 
-    }*/
+    }
+
 }
