@@ -19,6 +19,7 @@ public class Agenda {
     public void editar(Contato contato) {
         excluir(contato);
         adicionar(contato);
+       // editar(contato);//
 
     }
 
