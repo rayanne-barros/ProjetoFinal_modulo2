@@ -10,30 +10,12 @@ public class Telefone {
     private String ramal;
     private String contato;
 
-    public Telefone(TipoTelefone tipo) {
-        this.tipo = tipo;
-    }
-
-    public Telefone(TipoTelefone tipo, String contato) {
-        this(tipo);
-        this.contato = contato;
-    }
-
-    public Telefone(TipoTelefone tipo, String ddi, String ddd, String numero, String ramal, String contato) {
-        this.tipo = tipo;
-        this.ddi = ddi;
-        this.ddd = ddd;
-        this.numero = numero;
-        this.ramal = ramal;
-        this.contato = contato;
-    }
-
     public TipoTelefone getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoTelefone tipo) {
-        this.tipo = tipo;
+    public void setTipo(String tipo) {
+        this.tipo = TipoTelefone.valueOf(tipo);
     }
 
     public String getDdi() {
@@ -74,24 +56,5 @@ public class Telefone {
 
     public void setContato(String contato) {
         this.contato = contato;
-    }
-
-    public String getTelefoneCompleto() {
-        String valor = ddi;
-        if (!ddd.isBlank() && !numero.isBlank()) {
-            valor += " " + ddd + "" + numero + " " + tipo;
-        }
-        return valor.trim();
-    }
-    @Override
-    public String toString() {
-        return "Telefone{" +
-                "tipo=" + tipo +
-                ", ddi='" + ddi + '\'' +
-                ", ddd='" + ddd + '\'' +
-                ", numero='" + numero + '\'' +
-                ", ramal='" + ramal + '\'' +
-                ", contato='" + contato + '\'' +
-                '}';
     }
 }

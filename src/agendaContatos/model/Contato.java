@@ -2,36 +2,18 @@ package agendaContatos.model;
 
 import agendaContatos.enums.TipoContato;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 public class Contato {
     private String nome;
     private String sobrenome;
     private String email;
     private TipoContato tipo;
+    private LocalDate dataNascimento;
 
     private List<Telefone> telefones;
     private List<Endereco> enderecos;
-
-
-
-    public Contato(String nome, String sobrenome) {
-        this(nome, sobrenome, "", TipoContato.Pessoal);
-
-    }
-
-    public Contato(String nome, String sobrenome, String email, TipoContato tipo) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
-        this.tipo = tipo;
-    }
-
-    public Contato(String nome, String sobrenome, Telefone telefone) {
-        this(nome, sobrenome);
-        this.telefones.add(telefone);
-    }
 
     public String getNome() {
         return nome;
@@ -61,8 +43,16 @@ public class Contato {
         return tipo;
     }
 
-    public void setTipo(TipoContato tipo) {
-        this.tipo = tipo;
+    public void setTipo(String tipo) {
+        this.tipo = TipoContato.valueOf(tipo);
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public List<Telefone> getTelefones() {
@@ -80,38 +70,6 @@ public class Contato {
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
     }
-
-    public String getNomeCompleto() {
-        String valor = nome;
-        if (!sobrenome.isBlank()) {
-            valor += " " + sobrenome;
-        }
-        return valor.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "Contato{" +
-                "nome='" + getNome() + '\'' +
-                ", sobrenome='" + getSobrenome() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Contato contato = (Contato) o;
-        return Objects.equals(nome, contato.nome) && Objects.equals(sobrenome, contato.sobrenome) && tipo == contato.tipo;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nome, sobrenome, tipo);
-    }
 }
-
-
 
 
