@@ -5,8 +5,13 @@ import agendaContatos.model.Contatos;
 import agendaContatos.ui.AgendaUI;
 
 import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AgendaController {
+
+    Scanner sc = new Scanner(System.in);
+
     private Agenda agenda = new Agenda();
 
     public  void adicionarContato(Contatos contato){
@@ -29,6 +34,57 @@ public class AgendaController {
     public void removerTodosContatos() {
         agenda.removerTodosContatos();
     }
+
+    public String pegaContato(){
+        System.out.println("Qual o nome do contato? ");
+        System.out.print("> ");
+        String nome = sc.nextLine();
+        return nome;
+    }
+
+    public List<Contatos> encontrarContato(String contatoProcurado) {
+
+        List<Contatos> contatosEncontrados = agenda
+                .getContatos()
+                .stream()
+                .filter(c -> c.getNome().equalsIgnoreCase(contatoProcurado))
+                .collect(Collectors.toList());
+
+        if (contatosEncontrados.size() == 0) {
+            System.err.println("Contato não encontrado. ");
+        }
+
+        return contatosEncontrados;
+    }
+
+    public Contatos escolherContato(List<Contatos> contatos) {
+
+        if(!(contatos.size() == 1)){
+            System.out.println("Qual o nome do contato? ");
+            System.out.print("> ");
+            Integer opcao = sc.nextInt();
+            sc.nextLine();
+            return contatos.get(opcao);
+        }
+        return contatos.get(0);
+    }
+
+    public void mostrarTelefonesParaContato(Contatos contato){
+        contato.getTelefones().forEach(telefone -> {
+            System.out.println("Telefone: " + telefone.getTelefoneCompleto());
+        });
+    }
+
+    public void mostrarEnderecosParaContato(Contatos contato){
+        contato.getEnderecos().forEach(endereco -> {
+            System.out.println("Endereço: " + endereco.getEnderecoCompleto());
+        });
+    }
+
+
+
+
+
 //
 //    public List<Contato> pesquisarNome(String nome) {
 //        List<Contato> contatosEncontrados = new ArrayList<>();
