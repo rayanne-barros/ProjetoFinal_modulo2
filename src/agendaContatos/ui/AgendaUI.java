@@ -12,6 +12,7 @@ import agendaContatos.model.Telefone;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AgendaUI {
     AgendaController controller = new AgendaController();
@@ -24,14 +25,22 @@ public class AgendaUI {
 
         do {
             System.out.println("Bem vindo(a) a sua agenda!");
-            System.out.println("Digite uma das opções abaixo");
-            System.out.println("1- Adicionar contato");
-            System.out.println("2- Pesquisar contato");
-            System.out.println("3- Excluir contato");
-            System.out.println("4- Listar contato");
-            System.out.println("0 - Sair\n");
-
-            System.out.print("DIGITE SUA OPÇÃO: ");
+            System.out.println("Olá! Digite a opção que você deseja: ");
+            System.out.println("1 - Adicionar Contato");
+            System.out.println("2 - Listar");
+            System.out.println("3 - Buscar Contato");
+            System.out.println("4 - Remover um contato");
+            System.out.println("5 - Remover todos os contatos");
+            System.out.println("6 - Adicionar telefone para contato");
+            System.out.println("7 - Adicionar um endereço a um contato");
+            System.out.println("8 - Remover um telefone de um contato da agenda");
+            System.out.println("9 - Remover um endereço de um contato da agenda");
+            System.out.println("10 - Exibir todas as informações de um contato da agenda");
+            System.out.println("11 - Listar todos os telefones de um contato da agenda");
+            System.out.println("12 - Listar todos os endereços de um contato da agenda");
+            System.out.println("13 - Exibir todas as informações de um telefone de um contato da agenda");
+            System.out.println("14 - Exibir todas as informações de um endereço de um contato da agenda");
+            System.out.println("0 - Sair do Programa ");
 
             String opcao = sc.nextLine();
 
@@ -40,6 +49,7 @@ public class AgendaUI {
                 case "2" : listarContatos(); break;
                 case "3" : pesquisarContatos(); break;
                 case "4" : subMenuExcluir(); break;
+                case "11" : listarTodosTelefonesParaContato(); break;
                 case "0" : continuar = false; break;
             }
 
@@ -317,4 +327,14 @@ public class AgendaUI {
         }
         return "Erro. Inicie o programa novamente.";
     }
+
+
+    public void listarTodosTelefonesParaContato() {
+
+        String contato = controller.pegaContato();
+        List<Contatos> contatosEncontrados = controller.encontrarContato(contato) ;
+        Contatos contatoSelecionado = controller.escolherContato(contatosEncontrados);
+        controller.mostrarTodasTelefonesParaContato(contatoSelecionado);
+    }
+
 }
