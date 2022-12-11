@@ -3,7 +3,7 @@
 ## Integrantes do grupo
 <ul>
 <li> Antônio Agamenon</li>
-<li> Arthuer Bicego</li>
+<li> Arthur Bicego</li>
 <li> Eveliny Muniz</li>
 <li> Rayanne Barros</li>
 <li> Renan Santos</li>

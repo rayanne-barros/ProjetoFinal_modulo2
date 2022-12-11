@@ -14,18 +14,9 @@ public class Endereco {
     private String bairro;
     private String complemento;
 
-    public Endereco(TipoEndereco tipo) {
-        this.tipo = tipo;
-    }
 
-    public Endereco(TipoEndereco tipo, String pais, String cep) {
-        this(tipo);
-        this.pais = pais;
-        this.cep = cep;
-    }
 
-    public Endereco(TipoEndereco tipo, String pais, String cep, String logradouro,String numero, String cidade, String estado, String bairro, String complemento) {
-        this.tipo = tipo;
+    public Endereco(String pais, String cep, String logradouro,String numero, String cidade, String estado, String bairro, String complemento, TipoEndereco tipo) {
         this.pais = pais;
         this.cep = cep;
         this.logradouro = logradouro;
@@ -34,14 +25,15 @@ public class Endereco {
         this.estado = estado;
         this.bairro = bairro;
         this.complemento = complemento;
+        this.tipo = tipo;
     }
 
     public TipoEndereco getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoEndereco tipo) {
-        this.tipo = tipo;
+    public void setTipo(String tipo) {
+        this.tipo = TipoEndereco.valueOf(tipo);
     }
 
     public String getPais() {
@@ -110,23 +102,23 @@ public class Endereco {
     public String getEnderecoCompleto() {
         String valor = logradouro;
         if (!numero.isBlank() && !cidade.isBlank()) {
-            valor += "," + numero + " - " + cidade;
+            valor += "," + numero + " - " + tipo;
         }
         return valor.trim();
 
     }
 
-    @Override
-    public String toString() {
-        return "Endereco{" +
-                "tipo=" + tipo +
-                ", pais='" + pais + '\'' +
-                ", cep='" + cep + '\'' +
-                ", logradouro='" + logradouro + '\'' +
-                ", cidade='" + cidade + '\'' +
-                ", estado='" + estado + '\'' +
-                ", bairro='" + bairro + '\'' +
-                ", complemento='" + complemento + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Endereco{" +
+//                "tipo=" + tipo +
+//                ", pais='" + pais + '\'' +
+//                ", cep='" + cep + '\'' +
+//                ", logradouro='" + logradouro + '\'' +
+//                ", cidade='" + cidade + '\'' +
+//                ", estado='" + estado + '\'' +
+//                ", bairro='" + bairro + '\'' +
+//                ", complemento='" + complemento + '\'' +
+//                '}';
+//    }
 }
