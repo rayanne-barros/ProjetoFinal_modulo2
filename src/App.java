@@ -1,11 +1,9 @@
-import agendaContatos.ui.AgendaUI;
+
+// IntelliJ API Decompiler stub source generated from a class file
+// Implementation of methods is not available
 
 public class App {
-    public static void main(String[] args) {
+    public App() { /* compiled code */ }
 
-        AgendaUI view = new AgendaUI();
-
-        view.mostrarMenu();
-
-    }
+    public static void main(java.lang.String[] args) { /* compiled code */ }
 }
