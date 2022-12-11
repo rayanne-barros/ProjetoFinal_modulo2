@@ -36,7 +36,7 @@ public class AgendaController {
     }
 
     public String pegaContato(){
-        System.out.println("Qual o contato? ");
+        System.out.println("Qual o nome do contato? ");
         System.out.print("> ");
         String nome = sc.nextLine();
         return nome;
@@ -57,7 +57,7 @@ public class AgendaController {
         return contatosEncontrados;
     }
 
-    public Contatos escolherContato(List<Contatos> contatos) { //Para buscar um contato para editar
+    public Contatos escolherContato(List<Contatos> contatos) {
 
         if(!(contatos.size() == 1)){
             System.out.println("Qual o nome do contato? ");
@@ -69,9 +69,15 @@ public class AgendaController {
         return contatos.get(0);
     }
 
-    public void mostrarTodasTelefonesParaContato(Contatos contato){
+    public void mostrarTelefonesParaContato(Contatos contato){
         contato.getTelefones().forEach(telefone -> {
-            System.out.println("(" + telefone.getDdd() + ") " + telefone.getNumero());
+            System.out.println("Telefone: " + telefone.getTelefoneCompleto());
+        });
+    }
+
+    public void mostrarEnderecosParaContato(Contatos contato){
+        contato.getEnderecos().forEach(endereco -> {
+            System.out.println("Endereço: " + endereco.getEnderecoCompleto());
         });
     }
 

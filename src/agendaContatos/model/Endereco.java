@@ -102,7 +102,7 @@ public class Endereco {
     public String getEnderecoCompleto() {
         String valor = logradouro;
         if (!numero.isBlank() && !cidade.isBlank()) {
-            valor += "," + numero + " - " + cidade;
+            valor += "," + numero + " - " + tipo;
         }
         return valor.trim();
 

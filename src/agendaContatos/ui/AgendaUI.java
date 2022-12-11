@@ -12,7 +12,6 @@ import agendaContatos.model.Telefone;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class AgendaUI {
     AgendaController controller = new AgendaController();
@@ -29,17 +28,16 @@ public class AgendaUI {
             System.out.println("1 - Adicionar Contato");
             System.out.println("2 - Listar");
             System.out.println("3 - Buscar Contato");
-            System.out.println("4 - Remover um contato");
-            System.out.println("5 - Remover todos os contatos");
-            System.out.println("6 - Adicionar telefone para contato");
-            System.out.println("7 - Adicionar um endereço a um contato");
-            System.out.println("8 - Remover um telefone de um contato da agenda");
-            System.out.println("9 - Remover um endereço de um contato da agenda");
-            System.out.println("10 - Exibir todas as informações de um contato da agenda");
-            System.out.println("11 - Listar todos os telefones de um contato da agenda");
-            System.out.println("12 - Listar todos os endereços de um contato da agenda");
-            System.out.println("13 - Exibir todas as informações de um telefone de um contato da agenda");
-            System.out.println("14 - Exibir todas as informações de um endereço de um contato da agenda");
+            System.out.println("4 - Remover  contato");
+            System.out.println("5 - Adicionar telefone para contato");
+            System.out.println("6 - Adicionar um endereço a um contato");
+            System.out.println("7 - Remover um telefone de um contato da agenda");
+            System.out.println("8 - Remover um endereço de um contato da agenda");
+            System.out.println("9 - Exibir todas as informações de um contato da agenda");
+            System.out.println("10 - Listar todos os telefones de um contato da agenda");
+            System.out.println("11 - Listar todos os endereços de um contato da agenda");
+            System.out.println("12 - Exibir todas as informações de um telefone de um contato da agenda");
+            System.out.println("13 - Exibir todas as informações de um endereço de um contato da agenda");
             System.out.println("0 - Sair do Programa ");
 
             String opcao = sc.nextLine();
@@ -49,7 +47,8 @@ public class AgendaUI {
                 case "2" : listarContatos(); break;
                 case "3" : pesquisarContatos(); break;
                 case "4" : subMenuExcluir(); break;
-                case "11" : listarTodosTelefonesParaContato(); break;
+                case "11" : listarTodosTelefonesContato(); break;
+                case "12" : listarTodosEnderecosContato(); break;
                 case "0" : continuar = false; break;
             }
 
@@ -141,8 +140,8 @@ public class AgendaUI {
                 System.out.print("DIGITE O RAMAL: ");
                 telefone.setRamal(sc.nextLine().trim());
 
-                System.out.print("DIGITE O NOME DO CONTATO: ");
-                telefone.setContato(sc.nextLine().trim());
+//                System.out.print("DIGITE O NOME DO CONTATO: ");
+//                telefone.setContato(sc.nextLine().trim());
 
                 System.out.println("TIPO DE TELEFONE:  " + "(CELULAR, COMERCIAL, RESIDENCIAL)");
                 telefone.setTipo(sc.nextLine().toUpperCase().trim());
@@ -182,14 +181,10 @@ public class AgendaUI {
         private void listarContatos() {
             System.out.println("Contatos cadastrados: ");
             List<Contatos> lstContatosCadastrados = controller.listarContatos();
-            int index = 0;
             for (Contatos contato : lstContatosCadastrados) {
-                Integer id = contato.getTelefones().indexOf(index);
-                System.out.println("\nIDENTIFICADOR: " + id);
-                System.out.println("\nNOME: " + contato.getNome().toUpperCase() + " " + contato.getSobrenome().toUpperCase());
+                System.out.println("\nNOME Completo: " + contato.getNome().toUpperCase() + " " + contato.getSobrenome().toUpperCase());
                 System.out.println("E-MAIL: " + contato.getEmail().toLowerCase());
                 System.out.println("TIPO DE CONTATO: " + contato.getTipo());
-                index++;
 
             }
         }
@@ -329,12 +324,20 @@ public class AgendaUI {
     }
 
 
-    public void listarTodosTelefonesParaContato() {
+    public void listarTodosTelefonesContato() {
 
         String contato = controller.pegaContato();
         List<Contatos> contatosEncontrados = controller.encontrarContato(contato) ;
         Contatos contatoSelecionado = controller.escolherContato(contatosEncontrados);
-        controller.mostrarTodasTelefonesParaContato(contatoSelecionado);
+        controller.mostrarTelefonesParaContato(contatoSelecionado);
+    }
+
+    public void listarTodosEnderecosContato() {
+        String contato = controller.pegaContato();
+        List<Contatos> contatosEncontrados = controller.encontrarContato(contato) ;
+        Contatos contatoSelecionado = controller.escolherContato(contatosEncontrados);
+        controller.mostrarEnderecosParaContato(contatoSelecionado);
+
     }
 
 }
