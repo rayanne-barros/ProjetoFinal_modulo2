@@ -47,8 +47,8 @@ public class AgendaUI {
                 case "2" : listarContatos(); break;
                 case "3" : pesquisarContatos(); break;
                 case "4" : subMenuExcluir(); break;
-                case "11" : listarTodosTelefonesContato(); break;
-                case "12" : listarTodosEnderecosContato(); break;
+                case "10" : listarTodosTelefonesContato(); break;
+                case "11" : listarTodosEnderecosContato(); break;
                 case "0" : continuar = false; break;
             }
 
