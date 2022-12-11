@@ -10,6 +10,7 @@ import agendaContatos.model.Endereco;
 import agendaContatos.model.Telefone;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -238,7 +239,7 @@ public class AgendaUI {
         listarContatos();
 
         System.out.println("Digite o nome do contato a ser excluído.");
-        String nome = sc.nextLine();
+        String nome = sc.nextLine().toUpperCase();
 
         //pesquisarContato;
         List<Contatos> contatosEncontrados = new ArrayList<>();
@@ -247,6 +248,7 @@ public class AgendaUI {
                 contatosEncontrados.add(agenda.getContatos().get(i));
             }
         }
+
         for (int i = 0; i < contatosEncontrados.size(); i++) {
             System.out.println(i + ". NOME Completo: " + contatosEncontrados.get(i).getNome().toUpperCase() + " " + contatosEncontrados.get(i).getSobrenome().toUpperCase());
         }
@@ -296,7 +298,10 @@ public class AgendaUI {
         String subMenu = "";
 
         while (continuar) {
-            System.out.println("Escolha uma opção: ");
+            System.out.println("Escolha uma opção:" +
+                    "\n1 - Excluir um contato." +
+                    "\n2 - Excluir todos os contatos." +
+                    "\n3 - Voltar ao menu ");
             subMenu = sc.nextLine();
 
             switch (subMenu) {
