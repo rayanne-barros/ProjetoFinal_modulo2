@@ -235,15 +235,29 @@ public class AgendaUI {
         Scanner sc = new Scanner(System.in);
         Agenda agenda = new Agenda();
 
-        // listar contatos
-        System.out.println("Digite o ID do contato a ser excluído.");
+        listarContatos();
 
+        System.out.println("Digite o nome do contato a ser excluído.");
+        String nome = sc.nextLine();
+
+        //pesquisarContato;
+        List<Contatos> contatosEncontrados = new ArrayList<>();
+        for (int i = 0; i < agenda.getContatos().size(); i++) {
+            if(agenda.getContatos().get(i).getNome().contains(nome)){
+                contatosEncontrados.add(agenda.getContatos().get(i));
+            }
+        }
+        for (int i = 0; i < contatosEncontrados.size(); i++) {
+            System.out.println(i + ". NOME Completo: " + contatosEncontrados.get(i).getNome().toUpperCase() + " " + contatosEncontrados.get(i).getSobrenome().toUpperCase());
+        }
+
+        System.out.println("Digite o índice do contato a ser excluído.");
         String opcaoEscolhida = sc.nextLine();
-        Integer quantidadeOpcoes = agenda.getContatos().size();
-        String mensagem = "Digite o ID a ser digitado novamente";
-        String opcaoEscolhida1 = validarOpcoes(quantidadeOpcoes, opcaoEscolhida, mensagem);
+        String opcaoEscolhida1 = validarOpcoes(contatosEncontrados.size(), opcaoEscolhida, "Digite o índice a ser digitado novamente");
 
-        System.out.println("Você tem certeza que deseja excluir a opção " + opcaoEscolhida1 + "? (0 - Não / 1 - Sim");
+        System.out.println("Você tem certeza que deseja excluir a opção " + opcaoEscolhida1 + ". "
+                + contatosEncontrados.get(Integer.valueOf(opcaoEscolhida1))
+                +  "? (0 - Não / 1 - Sim");
         String opcaoNaoSim = sc.nextLine();
         String opcaoEscolhida2 = validarOpcoes(2, opcaoNaoSim, "Você tem certeza que deseja excluir a opção "
                 + opcaoEscolhida1 + "? Digite 0 caso 'Não' e 1 caso 'Sim'.");
@@ -251,8 +265,8 @@ public class AgendaUI {
         if (opcaoEscolhida2.equals("0")) {
             subMenuExcluir();
         } else if (opcaoEscolhida2.equals("1")) {
-            //    agenda.removerContato(contato); ESCOLHER CONTATO POR ID
-            //    System.out.println("O contato " + contato + " foi excluído.");
+            agenda.removerContato(contatosEncontrados.get(Integer.valueOf(opcaoEscolhida1)));
+            System.out.println("O contato foi excluído.");
             subMenuExcluir();
         }
 
