@@ -3,22 +3,17 @@ package agendaContatos.model;
 import agendaContatos.enums.TipoTelefone;
 
 public class Telefone {
-    private TipoTelefone tipo;
-    private String ddi;
-    private String ddd;
-    private String numero;
-    private String ramal;
-    private String contato;
+   private TipoTelefone tipo;
+   private String ddd;
+   private String numero;
+   private String contato;
 
-    public Telefone( String ddi, String ddd, String numero, String ramal, String contato, TipoTelefone tipo) {
-        this.ddi = ddi;
+    public Telefone( String ddd, String numero,String contato, TipoTelefone tipo) {
         this.ddd = ddd;
         this.numero = numero;
-        this.ramal = ramal;
         this.contato = contato;
         this.tipo = tipo;
     }
-
 
     public TipoTelefone getTipo() {
         return tipo;
@@ -26,14 +21,6 @@ public class Telefone {
 
     public void setTipo(String tipo) {
         this.tipo = TipoTelefone.valueOf(tipo);
-    }
-
-    public String getDdi() {
-        return ddi;
-    }
-
-    public void setDdi(String ddi) {
-        this.ddi = ddi;
     }
 
     public String getDdd() {
@@ -52,26 +39,11 @@ public class Telefone {
         this.numero = numero;
     }
 
-    public String getRamal() {
-        return ramal;
-    }
-
-    public void setRamal(String ramal) {
-        this.ramal = ramal;
-    }
-
-    public String getContato() {
-        return contato;
-    }
-
-    public void setContato(String contato) {
-        this.contato = contato;
-    }
 
     public String getTelefoneCompleto() {
-        String valor = ddi;
+        String valor = ddd;
         if (!ddd.isBlank() && !numero.isBlank()) {
-            valor += " " + ddd + "" + numero + " " + tipo;
+            valor += ddd + "" + numero + " " + tipo;
         }
         return valor.trim();
     }
@@ -79,10 +51,8 @@ public class Telefone {
     public String toString() {
         return "Telefone{" +
                 "tipo=" + tipo +
-                ", ddi='" + ddi + '\'' +
                 ", ddd='" + ddd + '\'' +
                 ", numero='" + numero + '\'' +
-                ", ramal='" + ramal + '\'' +
                 ", contato='" + contato + '\'' +
                 '}';
     }

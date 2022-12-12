@@ -28,7 +28,7 @@ public class AgendaUI {
             System.out.println("1 - Adicionar Contato");
             System.out.println("2 - Listar");
             System.out.println("3 - Buscar Contato");
-            /*System.out.println("4 - Remover  contato");
+            System.out.println("4 - Remover  contato");
             System.out.println("5 - Adicionar telefone para contato");
             System.out.println("6 - Adicionar um endereço a um contato");
             System.out.println("7 - Remover um telefone de um contato da agenda");
@@ -38,7 +38,7 @@ public class AgendaUI {
             System.out.println("11 - Listar todos os endereços de um contato da agenda");
             System.out.println("12 - Exibir todas as informações de um telefone de um contato da agenda");
             System.out.println("13 - Exibir todas as informações de um endereço de um contato da agenda");
-            System.out.println("0 - Sair do Programa ");*/
+            System.out.println("0 - Sair do Programa ");
 
             String opcao = sc.nextLine();
 
@@ -63,7 +63,7 @@ public class AgendaUI {
 
             do {
                 System.out.println("\nDESEJA ADCIONAR ENDEREÇO? \n");
-                System.out.println("Digite uma das opções abaixo: ");
+
                 System.out.println("1-  SIM");
                 System.out.println("0 - NÃO");
 
@@ -75,10 +75,10 @@ public class AgendaUI {
                     break;
                 }
 
-                Endereco endereco = new Endereco("","","","","","","","", TipoEndereco.RESIDENCIAL);
+                Endereco endereco = new Endereco("","","","","",TipoEndereco.RESIDENCIAL);
 
-                System.out.print("\nDIGITE O PAÍS: ");
-                endereco.setPais(sc.nextLine().trim());
+                System.out.print("DIGITE A CIDADE: ");
+                endereco.setCidade(sc.nextLine().trim());
 
                 System.out.print("DIGITE O CEP: ");
                 endereco.setCep(sc.nextLine().trim());
@@ -89,17 +89,8 @@ public class AgendaUI {
                 System.out.print("DIGITE O NUMERO DA CASA: ");
                 endereco.setNumero(sc.nextLine().trim());
 
-                System.out.print("DIGITE O BAIRRO: ");
-                endereco.setBairro(sc.nextLine().trim());
-
-                System.out.print("DIGITE A CIDADE: ");
-                endereco.setCidade(sc.nextLine().trim());
-
                 System.out.print("DIGITE O ESTADO: ");
                 endereco.setEstado(sc.nextLine().trim());
-
-                System.out.print("DIGITE O COMPLEMENTO: ");
-                endereco.setComplemento(sc.nextLine().trim());
 
                 System.out.println("TIPO DE ENDERECO: " + "(COMERCIAL, RESIDENCIAL, VIZINHO)");
                 endereco.setTipo(sc.nextLine().toUpperCase().trim());
@@ -116,7 +107,7 @@ public class AgendaUI {
             do {
 
                 System.out.println("\nDESEJA ADCIONAR TELEFONE? ");
-                System.out.println("Digite uma das opções abaixo");
+
                 System.out.println("1-  SIM");
                 System.out.println("0 - NÃO");
 
@@ -126,22 +117,13 @@ public class AgendaUI {
 
                 if (opcao.equals("0")){ break;}
 
-                Telefone telefone = new Telefone("","","","","",TipoTelefone.CELULAR);
-
-                System.out.print("\nDIGITE O DDI: ");
-                telefone.setDdi(sc.nextLine().trim());
+                Telefone telefone = new Telefone("","","",TipoTelefone.CELULAR);
 
                 System.out.print("DIGITE O DDD: ");
                 telefone.setDdd(sc.nextLine().trim());
 
                 System.out.print("DIGITE O NUMERO: ");
                 telefone.setNumero(sc.nextLine().trim());
-
-                System.out.print("DIGITE O RAMAL: ");
-                telefone.setRamal(sc.nextLine().trim());
-
-//                System.out.print("DIGITE O NOME DO CONTATO: ");
-//                telefone.setContato(sc.nextLine().trim());
 
                 System.out.println("TIPO DE TELEFONE:  " + "(CELULAR, COMERCIAL, RESIDENCIAL)");
                 telefone.setTipo(sc.nextLine().toUpperCase().trim());
@@ -181,6 +163,7 @@ public class AgendaUI {
         private void listarContatos() {
             System.out.println("Contatos cadastrados: ");
             List<Contatos> lstContatosCadastrados = controller.listarContatos();
+
             for (Contatos contato : lstContatosCadastrados) {
                 System.out.println("\nNOME Completo: " + contato.getNome().toUpperCase() + " " + contato.getSobrenome().toUpperCase());
                 System.out.println("E-MAIL: " + contato.getEmail().toLowerCase());
@@ -189,9 +172,7 @@ public class AgendaUI {
             }
         }
 
-
-
-        public void mostrarContato(Contatos contato){
+         public void mostrarContato(Contatos contato){
 
 
             System.out.println("\nNOME: " + contato.getNome().toUpperCase() + " " + contato.getSobrenome().toUpperCase());
@@ -203,8 +184,8 @@ public class AgendaUI {
             contato.getTelefones().stream().forEach(telefone -> {
                 Integer id = contato.getTelefones().indexOf(telefone);
                 System.out.println("\nIDENTIFICADOR: " + id);
-                System.out.println("TELEFONE: " + telefone.getDdi() + " " + telefone.getDdd() + " " + telefone.getNumero() );
-                System.out.println("RAMAL: " + telefone.getRamal());
+                System.out.println("TELEFONE: " + telefone.getDdd() + " " + telefone.getNumero() );
+
                 System.out.println("TIPO DE TELEFONE: " + telefone.getTipo());
 
 
@@ -214,13 +195,10 @@ public class AgendaUI {
             contato.getEnderecos().stream().forEach(endereco -> {
                 Integer id = contato.getEnderecos().indexOf(endereco);
                 System.out.println("\nIDENTIFICADOR: " + id);
-                System.out.println("PAIS: " + endereco.getPais());
                 System.out.println("RUA: " + endereco.getLogradouro());
                 System.out.println("NÚMERO: " + endereco.getNumero());
-                System.out.println("BAIRRO: " + endereco.getBairro());
                 System.out.println("CEP: " + endereco.getCep());
                 System.out.println("MUNICIPIO: " + endereco.getCidade() + " - " + endereco.getEstado());
-                System.out.println("COMPLEMENTO: " + endereco.getComplemento());
                 System.out.println("TIPO DE ENDEREÇO: " + endereco.getTipo());
                 System.out.println();
 
@@ -236,15 +214,9 @@ public class AgendaUI {
                 System.out.println("Nome: "+contato.getNomeCompleto());
                 System.out.println("Email: "+contato.getEmail()+"\n");
 
-
-
-
             }
 
-
-
-
-        }
+       }
 
     private void excluirContato() {
         Scanner sc = new Scanner(System.in);

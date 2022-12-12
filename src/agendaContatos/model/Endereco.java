@@ -11,20 +11,16 @@ public class Endereco {
     private String numero;
     private String cidade;
     private String estado;
-    private String bairro;
-    private String complemento;
 
 
 
-    public Endereco(String pais, String cep, String logradouro,String numero, String cidade, String estado, String bairro, String complemento, TipoEndereco tipo) {
-        this.pais = pais;
+
+    public Endereco(String cidade, String cep, String logradouro,String numero, String estado, TipoEndereco tipo) {
+        this.cidade = cidade;
         this.cep = cep;
         this.logradouro = logradouro;
         this.numero = numero;
-        this.cidade = cidade;
         this.estado = estado;
-        this.bairro = bairro;
-        this.complemento = complemento;
         this.tipo = tipo;
     }
 
@@ -36,15 +32,7 @@ public class Endereco {
         this.tipo = TipoEndereco.valueOf(tipo);
     }
 
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    public String getCep() {
+   public String getCep() {
         return cep;
     }
 
@@ -81,22 +69,6 @@ public class Endereco {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
     }
 
     public String getEnderecoCompleto() {
