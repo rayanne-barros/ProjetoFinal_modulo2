@@ -2,6 +2,8 @@ package agendaContatos.controll;
 
 import agendaContatos.model.Agenda;
 import agendaContatos.model.Contatos;
+import agendaContatos.model.Endereco;
+import agendaContatos.model.Telefone;
 import agendaContatos.ui.AgendaUI;
 
 import java.util.List;
@@ -37,7 +39,7 @@ public class AgendaController {
 
     public String pegaContato(){
         System.out.println("Qual o nome do contato? ");
-        System.out.print("> ");
+        System.out.print(">>> ");
         String nome = sc.nextLine();
         return nome;
     }
@@ -61,7 +63,7 @@ public class AgendaController {
 
         if(!(contatos.size() == 1)){
             System.out.println("Qual o nome do contato? ");
-            System.out.print("> ");
+            System.out.print(">>> ");
             Integer opcao = sc.nextInt();
             sc.nextLine();
             return contatos.get(opcao);
@@ -69,6 +71,55 @@ public class AgendaController {
         return contatos.get(0);
     }
 
+    public Telefone escolherTelefoneRemover(Contatos contato) {
+
+        System.out.println("Qual telefone a remover? ");
+        System.out.print(">>> ");
+        for (int i = 0; i < contato.getTelefones().size(); i++) {
+            System.out.println("ID: "+(i)+" Telefone: "+contato.getTelefones().get(i));
+
+        }
+        Integer opcao = sc.nextInt();
+        sc.nextLine();
+        return contato.getTelefones().get(opcao);
+
+
+    }
+    public Endereco escolherEnderecoRemover(Contatos contato) {
+
+        System.out.println("Qual endereco a remover? ");
+        System.out.print(">>> ");
+        for (int i = 0; i < contato.getEnderecos().size(); i++) {
+            System.out.println("ID: "+(i)+" Telefone: "+contato.getEnderecos().get(i));
+
+        }
+        int opcao = sc.nextInt();
+        sc.nextLine();
+        return contato.getEnderecos().get(opcao);
+
+    }
+
+    public void apagaTelefoneContato() {
+        String contato = pegaContato();
+        List<Contatos> contatosEncontrados = encontrarContato(contato);
+        Contatos contatoSelecionado = escolherContato(contatosEncontrados);
+        Telefone telefone = escolherTelefoneRemover(contatoSelecionado);
+        long quantidadeApagados = agenda.getContatos().stream()
+                .filter(cont -> cont.equals(contatoSelecionado))
+                .map(cont -> cont.getTelefones().remove(telefone))
+                .count();
+
+        System.out.println("Foi/Foram apagado(s) " + quantidadeApagados + " telefone(s).");
+    }
+
+    public void apagaEnderecoContato() { // 9
+        String contato = pegaContato();
+        List<Contatos> contatosEncontrados = encontrarContato(contato);
+        Contatos contatoSelecionado = escolherContato(contatosEncontrados);
+        Endereco endereco = escolherEnderecoRemover(contatoSelecionado);
+        long quantidadeApagados = agenda.getContatos().stream().filter(cont -> cont.equals(contatoSelecionado)).map(cont -> cont.getEnderecos().remove(endereco)).count();
+        System.out.println("Foi/Foram apagado(s) " + quantidadeApagados + " endereço(s).");
+    }
     public void mostrarTelefonesParaContato(Contatos contato){
         contato.getTelefones().forEach(telefone -> {
             System.out.println("Telefone: " + telefone.getTelefoneCompleto());

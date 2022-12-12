@@ -43,17 +43,12 @@ public class Telefone {
     public String getTelefoneCompleto() {
         String valor = ddd;
         if (!ddd.isBlank() && !numero.isBlank()) {
-            valor += ddd + "" + numero + " " + tipo;
+            valor += numero;
         }
         return valor.trim();
     }
+
     @Override
-    public String toString() {
-        return "Telefone{" +
-                "tipo=" + tipo +
-                ", ddd='" + ddd + '\'' +
-                ", numero='" + numero + '\'' +
-                ", contato='" + contato + '\'' +
-                '}';
-    }
+    public String toString() { return "(" + ddd + ")" + numero; }
+
 }

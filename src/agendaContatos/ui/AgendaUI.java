@@ -29,6 +29,7 @@ public class AgendaUI {
             System.out.println("2 - Listar");
             System.out.println("3 - Buscar Contato");
             System.out.println("4 - Remover  contato");
+            // Falta o remover todos os contatos
             System.out.println("5 - Adicionar telefone para contato");
             System.out.println("6 - Adicionar um endereço a um contato");
             System.out.println("7 - Remover um telefone de um contato da agenda");
@@ -47,6 +48,8 @@ public class AgendaUI {
                 case "2" : listarContatos(); break;
                 case "3" : pesquisarContatos(); break;
                 case "4" : subMenuExcluir(); break;
+                case "7" : controller.apagaTelefoneContato(); break;
+                case "8" : controller.apagaEnderecoContato(); break;
                 case "10" : listarTodosTelefonesContato(); break;
                 case "11" : listarTodosEnderecosContato(); break;
                 case "0" : continuar = false; break;
