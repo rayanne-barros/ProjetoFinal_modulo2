@@ -30,7 +30,7 @@ public class AgendaUI {
             System.out.println("3 - Buscar Contato");
             System.out.println("4 - Remover  contato");
             // Falta o remover todos os contatos
-            System.out.println("5 - Adicionar telefone para contato");
+            /*System.out.println("5 - Adicionar telefone para contato");
             System.out.println("6 - Adicionar um endereço a um contato");
             System.out.println("7 - Remover um telefone de um contato da agenda");
             System.out.println("8 - Remover um endereço de um contato da agenda");
@@ -39,7 +39,7 @@ public class AgendaUI {
             System.out.println("11 - Listar todos os endereços de um contato da agenda");
             System.out.println("12 - Exibir todas as informações de um telefone de um contato da agenda");
             System.out.println("13 - Exibir todas as informações de um endereço de um contato da agenda");
-            System.out.println("0 - Sair do Programa ");
+            System.out.println("0 - Sair do Programa ");*/
 
             String opcao = sc.nextLine();
 
@@ -208,9 +208,10 @@ public class AgendaUI {
         private void pesquisarContatos() {
             String nome = controller.pegaContato();
             List<Contatos> cttEncontrados = controller.encontrarContato(nome);
+            System.out.println("Contato(s) localizado(s): \n");
             for (Contatos contato: cttEncontrados
                  ) {
-                System.out.println("Contato localizado: \n");
+
                 System.out.println("Nome: "+contato.getNomeCompleto());
 
 
