@@ -74,23 +74,15 @@ public class Endereco {
     public String getEnderecoCompleto() {
         String valor = logradouro;
         if (!numero.isBlank() && !cidade.isBlank()) {
-            valor += "," + numero + " - " + tipo;
+            valor += "," + numero;
         }
         return valor.trim();
 
     }
 
-//    @Override
-//    public String toString() {
-//        return "Endereco{" +
-//                "tipo=" + tipo +
-//                ", pais='" + pais + '\'' +
-//                ", cep='" + cep + '\'' +
-//                ", logradouro='" + logradouro + '\'' +
-//                ", cidade='" + cidade + '\'' +
-//                ", estado='" + estado + '\'' +
-//                ", bairro='" + bairro + '\'' +
-//                ", complemento='" + complemento + '\'' +
-//                '}';
-//    }
+
+
+    @Override
+    public String toString() { return  logradouro + ", N: "  +  numero + ". " + cidade +  "-" + estado; }
+
 }
