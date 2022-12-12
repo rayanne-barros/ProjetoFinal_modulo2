@@ -43,8 +43,21 @@ public class AgendaController {
         String nome = sc.nextLine();
         return nome;
     }
-
     public List<Contatos> encontrarContato(String contatoProcurado) {
+
+        List<Contatos> contatosEncontrados = agenda
+                .getContatos()
+                .stream()
+                .filter(c -> c.getNome().equalsIgnoreCase(contatoProcurado) || c.getSobrenome().equalsIgnoreCase(contatoProcurado))
+                .collect(Collectors.toList());
+
+        if (contatosEncontrados.size() == 0) {
+            System.err.println("Contato não encontrado. ");
+        }
+
+        return contatosEncontrados;
+    }
+    /*public List<Contatos> encontrarContato(String contatoProcurado) {
 
         List<Contatos> contatosEncontrados = agenda
                 .getContatos()
@@ -57,7 +70,7 @@ public class AgendaController {
         }
 
         return contatosEncontrados;
-    }
+    }*/
 
     public Contatos escolherContato(List<Contatos> contatos) {
 
