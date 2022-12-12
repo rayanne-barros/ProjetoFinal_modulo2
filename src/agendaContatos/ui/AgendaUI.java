@@ -120,7 +120,7 @@ public class AgendaUI {
 
                 if (opcao.equals("0")){ break;}
 
-                Telefone telefone = new Telefone("","","",TipoTelefone.CELULAR);
+                Telefone telefone = new Telefone("","",TipoTelefone.CELULAR);
 
                 System.out.print("DIGITE O DDD: ");
                 telefone.setDdd(sc.nextLine().trim());
@@ -139,16 +139,13 @@ public class AgendaUI {
         }
         private void adicionarContato() {
 
-            Contatos contato = new Contatos("","","", TipoContato.PESSOAL);
+            Contatos contato = new Contatos("","", TipoContato.PESSOAL);
 
             System.out.print("\nDIGITE O NOME DO CONTATO: ");
             contato.setNome(sc.nextLine().trim().toUpperCase());
 
             System.out.print("DIGITE O SOBRENOME DO CONTATO: ");
             contato.setSobrenome(sc.nextLine().trim().toUpperCase());
-
-            System.out.print("DIGITE O EMAIL DO CONTATO: ");
-            contato.setEmail(sc.nextLine().trim().toLowerCase());
 
             System.out.println("DIGITE O TIPO DO CONTATO: " + "(PESSOAL, PROFISSIONAL)");
             contato.setTipo(sc.nextLine().toUpperCase().trim());
@@ -160,7 +157,10 @@ public class AgendaUI {
             contato.setTelefones(mostrarMenuCadastroTelefone());
 
             controller.adicionarContato(contato);
-            mostrarContato(contato);
+            System.out.println("Contato adicionado com sucesso!\n");
+            mostrarMenu();
+
+           // mostrarContato(contato);
         }
 
         private void listarContatos() {
@@ -169,8 +169,7 @@ public class AgendaUI {
 
             for (Contatos contato : lstContatosCadastrados) {
                 System.out.println("\nNOME Completo: " + contato.getNome().toUpperCase() + " " + contato.getSobrenome().toUpperCase());
-                System.out.println("E-MAIL: " + contato.getEmail().toLowerCase());
-                System.out.println("TIPO DE CONTATO: " + contato.getTipo());
+               // System.out.println("TIPO DE CONTATO: " + contato.getTipo());
 
             }
         }
@@ -179,7 +178,6 @@ public class AgendaUI {
 
 
             System.out.println("\nNOME: " + contato.getNome().toUpperCase() + " " + contato.getSobrenome().toUpperCase());
-            System.out.println("E-MAIL: " + contato.getEmail().toLowerCase());
             System.out.println("TIPO DE CONTATO: " + contato.getTipo());
 
             System.out.println("\nTelefones: \n");
@@ -188,7 +186,6 @@ public class AgendaUI {
                 Integer id = contato.getTelefones().indexOf(telefone);
                 System.out.println("\nIDENTIFICADOR: " + id);
                 System.out.println("TELEFONE: " + telefone.getDdd() + " " + telefone.getNumero() );
-
                 System.out.println("TIPO DE TELEFONE: " + telefone.getTipo());
 
 
@@ -215,7 +212,7 @@ public class AgendaUI {
                  ) {
                 System.out.println("Contato localizado: \n");
                 System.out.println("Nome: "+contato.getNomeCompleto());
-                System.out.println("Email: "+contato.getEmail()+"\n");
+
 
             }
 
