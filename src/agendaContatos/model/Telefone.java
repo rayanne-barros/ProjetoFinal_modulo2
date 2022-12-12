@@ -6,12 +6,11 @@ public class Telefone {
    private TipoTelefone tipo;
    private String ddd;
    private String numero;
-   private String contato;
 
-    public Telefone( String ddd, String numero,String contato, TipoTelefone tipo) {
+
+    public Telefone( String ddd, String numero, TipoTelefone tipo) {
         this.ddd = ddd;
         this.numero = numero;
-        this.contato = contato;
         this.tipo = tipo;
     }
 

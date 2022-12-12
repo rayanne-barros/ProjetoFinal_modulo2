@@ -7,16 +7,14 @@ import java.util.List;
 public class Contatos {
     private String nome;
     private String sobrenome;
-    private String email;
     private TipoContato tipo;
 
     private List<Telefone> telefones;
     private List<Endereco> enderecos;
 
-    public Contatos(String nome, String sobrenome, String email, TipoContato tipo) {
+    public Contatos(String nome, String sobrenome, TipoContato tipo) {
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.email = email;
         this.tipo = tipo;
     }
 
@@ -34,14 +32,6 @@ public class Contatos {
 
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public TipoContato getTipo() {
