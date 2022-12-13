@@ -10,7 +10,6 @@ public class Agenda {
         return contatos;
     }
 
-
     public void addContatos(Contatos contato) {// FUNCAO PARA ADD CONTATO E NAO A LISTA INTEIRA
         contatos.add(contato);
     }
