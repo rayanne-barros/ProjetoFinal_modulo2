@@ -2,7 +2,9 @@ package agendaContatos.model;
 
 import agendaContatos.enums.TipoContato;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Contatos {
     private String nome;
@@ -12,9 +14,14 @@ public class Contatos {
     private List<Telefone> telefones;
     private List<Endereco> enderecos;
 
+
     public Contatos(String nome, String sobrenome, TipoContato tipo) {
         this.nome = nome;
         this.sobrenome = sobrenome;
+        this.tipo = tipo;
+    }
+
+    public Contatos(TipoContato tipo) {
         this.tipo = tipo;
     }
 
@@ -66,6 +73,20 @@ public class Contatos {
         return valor.trim();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contatos contatos = (Contatos) o;
+        return Objects.equals(nome, contatos.nome) && Objects.equals(sobrenome, contatos.sobrenome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, sobrenome);
+    }
+
+
 //    @Override
 //    public String toString() {
 //        return "Contato{" +
@@ -74,20 +95,9 @@ public class Contatos {
 //                ", email='" + getEmail() + '\'' +
 //                '}';
 //    }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Contato contato = (Contato) o;
-//        return Objects.equals(nome, contato.nome) && Objects.equals(sobrenome, contato.sobrenome) && tipo == contato.tipo;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(nome, sobrenome, tipo);
-//    }
+
 }
+
 
 
 

@@ -49,6 +49,7 @@ public class AgendaUI {
 
     private void adicionarContato() {
         controller.adicionarContato();
+
     }
 
     public Contatos listarContatos() {

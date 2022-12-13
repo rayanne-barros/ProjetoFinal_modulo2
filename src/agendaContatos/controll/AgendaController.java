@@ -7,6 +7,7 @@ import agendaContatos.model.Agenda;
 import agendaContatos.model.Contatos;
 import agendaContatos.model.Endereco;
 import agendaContatos.model.Telefone;
+import agendaContatos.util.ConsoleUIHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +35,20 @@ public class AgendaController {
         contato.setTelefones(mostrarMenuCadastroTelefone());
         contato.setEnderecos(mostrarMenuCadastroEndereco());
 
-        agenda.addContatos(contato);
-        System.out.println("Contato adicionado com sucesso!\n");
+        /* Implementando a Regra de negócio
+         */
+        Boolean contatoRepetido = false;
+
+        for (int i = 0; i < agenda.getContatos().size(); i++) {
+            if (agenda.getContatos().get(i).equals(contato)) {
+                System.out.println("Esse contato já foi cadastrado!");
+                contatoRepetido = true;
+            }
+        }
+        if (!contatoRepetido) {
+            agenda.addContatos(contato);
+            System.out.println("Contato adicionado com sucesso!\n");
+        }
     }
 
     public List<Telefone> mostrarMenuCadastroTelefone() {
@@ -120,6 +133,7 @@ public class AgendaController {
         } while (continuar);
         return enderecos;
     }
+
 
     public Contatos listarContatos() {
         System.out.println("Contatos cadastrados: ");
