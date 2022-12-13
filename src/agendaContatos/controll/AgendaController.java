@@ -98,18 +98,53 @@ public class AgendaController {
 
     }
 
+    public void pegaID() {
+        System.out.println("Digite o identificador do contato.");
+        String opcaoEscolhida = sc.nextLine();
+        Contatos contatoListar = agenda.getContatos().get(Integer.valueOf(opcaoEscolhida));
+
+//        List<Contatos> cttEncontrados = encontrarContato(nome);
+//        System.out.println("Contato(s) localizado(s): \n");
+//        for (int i = 0; i < cttEncontrados.size(); i++) {
+//            System.out.println("IDENTIFICADOR: " + i + "Nome: " + cttEncontrados.get(i).getNome() + " " + cttEncontrados.get(i).getSobrenome());
+//        }
+//
+//        System.out.println("Digite o identificador do contato a ser excluído.");
+//        String opcaoEscolhida = sc.nextLine();
+
+    }
+
     public void apagaTelefoneContato() {
-        String contato = pegaContato();
-        List<Contatos> contatosEncontrados = encontrarContato(contato);
-        Contatos contatoSelecionado = escolherContato(contatosEncontrados);
-        Telefone telefone = escolherTelefoneRemover(contatoSelecionado);
+//        String contato = pegaContato();
+//        List<Contatos> contatosEncontrados = encontrarContato(contato);
+//        Contatos contatoSelecionado = escolherContato(contatosEncontrados);
+//        Telefone telefone = escolherTelefoneRemover(contatoSelecionado);
+
+        System.out.println("Digite o nome do contato a ser excluído.");
+        String nome = sc.nextLine().toUpperCase();
+
+        List<Contatos> cttEncontrados = encontrarContato(nome);
+
+        System.out.println("Contato(s) localizado(s): \n");
+        for (int i = 0; i < cttEncontrados.size(); i++) {
+            System.out.println("IDENTIFICADOR: " + i + "Nome: " + cttEncontrados.get(i).getNome() + " " + cttEncontrados.get(i).getSobrenome());
+        }
+
+        //Contatos contatoSelecionado = escolherContato(cttEncontrados);
+
+        System.out.println("Digite o identificador do contato a ser excluído.");
+        String opcaoEscolhida = sc.nextLine();
+
+        Telefone telefone = escolherTelefoneRemover(cttEncontrados.get(Integer.valueOf(opcaoEscolhida)));
         long quantidadeApagados = agenda.getContatos().stream()
-                .filter(cont -> cont.equals(contatoSelecionado))
+                .filter(cont -> cont.equals(cttEncontrados.get(Integer.valueOf(opcaoEscolhida))))
                 .map(cont -> cont.getTelefones().remove(telefone))
                 .count();
 
         System.out.println("Foi/Foram apagado(s) " + quantidadeApagados + " telefone(s).");
     }
+
+
 
     public void apagaEnderecoContato() { // 9
         String contato = pegaContato();
