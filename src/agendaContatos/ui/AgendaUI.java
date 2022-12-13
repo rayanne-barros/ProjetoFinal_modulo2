@@ -70,7 +70,7 @@ public class AgendaUI {
      //   System.out.println("3 - Adicionar um endereço.");
         System.out.println("4 - Remover um telefone.");
         System.out.println("5 - Remover um endereço.");
-     //   System.out.println("6 - Exibir todas as informações do contato.");
+        System.out.println("6 - Exibir todas as informações do contato.");
         System.out.println("7 - Listar todos os telefones do contato.");
         System.out.println("8 - Listar todos os endereços do contato.");
         System.out.println("0 - Voltar ao menu.");
@@ -94,7 +94,7 @@ public class AgendaUI {
            // case "3" -> adicionarEnderecoContato(contato);
             case "4" -> removerTelefoneContato(contato);
             case "5" -> removerEnderecoContato(contato);
-          //  case "6" -> exibirInformacoesContato(contato);
+           case "6" -> exibirInformacoesContato(contato);
             case "7" -> listarTodosTelefonesContato(contato);
             case "8" -> listarTodosEnderecosContato(contato);
             case "0" -> mostrarMenu();
@@ -126,11 +126,11 @@ public class AgendaUI {
         controller.removerEnderecoContato(contato);
     }
 
-    /*
+
     public void exibirInformacoesContato(Contatos contato) {
-        controller.exibirInformacoesConato(contato);
+        controller.exibirTodasInformacoesContato(contato);
     }
-     */
+
 
     public void listarTodosTelefonesContato(Contatos contato) {
         controller.listarTodosTelefonesContato(contato);
