@@ -57,20 +57,6 @@ public class AgendaController {
 
         return contatosEncontrados;
     }
-    /*public List<Contatos> encontrarContato(String contatoProcurado) {
-
-        List<Contatos> contatosEncontrados = agenda
-                .getContatos()
-                .stream()
-                .filter(c -> c.getNome().equalsIgnoreCase(contatoProcurado))
-                .collect(Collectors.toList());
-
-        if (contatosEncontrados.size() == 0) {
-            System.err.println("Contato não encontrado. ");
-        }
-
-        return contatosEncontrados;
-    }*/
 
     public Contatos escolherContato(List<Contatos> contatos) {
 

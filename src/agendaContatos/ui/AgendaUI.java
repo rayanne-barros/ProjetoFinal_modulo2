@@ -19,6 +19,7 @@ public class AgendaUI {
     static final Scanner sc = new Scanner(System.in);
     private Integer tamanhoPagina;
     private Integer posicaoAtual;
+
     public void mostrarMenu() {
         Boolean continuar = true;
 
@@ -28,18 +29,17 @@ public class AgendaUI {
             System.out.println("1 - Adicionar Contato");
             System.out.println("2 - Listar");
             System.out.println("3 - Buscar Contato");
-            System.out.println("4 - Remover  contato");
-            // Falta o remover todos os contatos
-            /*System.out.println("5 - Adicionar telefone para contato");
-            System.out.println("6 - Adicionar um endereço a um contato");
-            System.out.println("7 - Remover um telefone de um contato da agenda");
-            System.out.println("8 - Remover um endereço de um contato da agenda");
-            System.out.println("9 - Exibir todas as informações de um contato da agenda");
+            System.out.println("4 - Remover contato");
+            System.out.println("5 - Remover todos os contato");
+      /* System.out.println("6 - Adicionar um endereço a um contato");
+       System.out.println("7 - Remover um telefone de um contato da agenda");
+       System.out.println("8 - Remover um endereço de um contato da agenda");
+       System.out.println("9 - Exibir todas as informações de um contato da agenda");*/
             System.out.println("10 - Listar todos os telefones de um contato da agenda");
             System.out.println("11 - Listar todos os endereços de um contato da agenda");
-            System.out.println("12 - Exibir todas as informações de um telefone de um contato da agenda");
-            System.out.println("13 - Exibir todas as informações de um endereço de um contato da agenda");
-            System.out.println("0 - Sair do Programa ");*/
+      /* System.out.println("12 - Exibir todas as informações de um telefone de um contato da agenda");
+       System.out.println("13 - Exibir todas as informações de um endereço de um contato da agenda");*/
+            System.out.println("0 - Sair do Programa ");
 
             String opcao = sc.nextLine();
 
@@ -47,9 +47,8 @@ public class AgendaUI {
                 case "1" : adicionarContato(); break;
                 case "2" : listarContatos(); break;
                 case "3" : pesquisarContatos(); break;
-                case "4" : subMenuExcluir(); break;
-                case "7" : controller.apagaTelefoneContato(); break;
-                case "8" : controller.apagaEnderecoContato(); break;
+                case "4" : excluirContato(); break;
+                case "5" : excluirTodosContatos(); break;
                 case "10" : listarTodosTelefonesContato(); break;
                 case "11" : listarTodosEnderecosContato(); break;
                 case "0" : continuar = false; break;
@@ -58,7 +57,8 @@ public class AgendaUI {
         }while (continuar);
     }
 
-        public List<Endereco> mostrarMenuCadastroEndereco(){
+
+    public List<Endereco> mostrarMenuCadastroEndereco(){
 
             Boolean continuar = true;
 
@@ -211,104 +211,45 @@ public class AgendaUI {
             System.out.println("Contato(s) localizado(s): \n");
             for (Contatos contato: cttEncontrados
                  ) {
-
                 System.out.println("Nome: "+contato.getNomeCompleto());
-
-
             }
-
        }
 
     private void excluirContato() {
         Scanner sc = new Scanner(System.in);
-        Agenda agenda = new Agenda();
 
-        // listar contatos
-        System.out.println("Digite o ID do contato a ser excluído.");
+        listarContatos();
 
-        String opcaoEscolhida = sc.nextLine();
-        Integer quantidadeOpcoes = agenda.getContatos().size();
-        String mensagem = "Digite o ID a ser digitado novamente";
-        String opcaoEscolhida1 = validarOpcoes(quantidadeOpcoes, opcaoEscolhida, mensagem);
+        System.out.println("Digite o nome do contato a ser excluído.");
+        String nome = sc.nextLine().toUpperCase();
 
-        System.out.println("Você tem certeza que deseja excluir a opção " + opcaoEscolhida1 + "? (0 - Não / 1 - Sim");
-        String opcaoNaoSim = sc.nextLine();
-        String opcaoEscolhida2 = validarOpcoes(2, opcaoNaoSim, "Você tem certeza que deseja excluir a opção "
-                + opcaoEscolhida1 + "? Digite 0 caso 'Não' e 1 caso 'Sim'.");
-
-        if (opcaoEscolhida2.equals("0")) {
-            subMenuExcluir();
-        } else if (opcaoEscolhida2.equals("1")) {
-            //    agenda.removerContato(contato); ESCOLHER CONTATO POR ID
-            //    System.out.println("O contato " + contato + " foi excluído.");
-            subMenuExcluir();
+        List<Contatos> cttEncontrados = controller.encontrarContato(nome);
+        System.out.println("Contato(s) localizado(s): \n");
+        for (int i = 0; i < cttEncontrados.size(); i++) {
+            System.out.println("IDENTIFICADOR: " + i + "Nome: " + cttEncontrados.get(i).getNome() + " " + cttEncontrados.get(i).getSobrenome());
         }
 
+        System.out.println("Digite o identificador do contato a ser excluído.");
+        String opcaoEscolhida = sc.nextLine();
+
+        controller.removerContato(cttEncontrados.get(Integer.valueOf(opcaoEscolhida)));
+        System.out.println("O contato foi excluído.");
+
     }
+
 
     private void excluirTodosContatos() {
         Scanner sc = new Scanner (System.in);
-        Agenda agenda = new Agenda();
 
-        System.out.println("Você tem certeza que deseja excluir todos os contatos? (0 - Não / 1 - Sim");
+        System.out.println("Você tem certeza que deseja excluir todos os contatos? (0 - Não / 1 - Sim)");
         String opcaoNaoSim = sc.nextLine();
-        String opcaoEscolhida1 = validarOpcoes(2, opcaoNaoSim, "Você tem certeza que deseja excluir todos os contatos?" +
-                " Digite 0 caso 'Não' e 1 caso 'Sim'.");
 
-        if (opcaoEscolhida1.equals("0")) {
-            subMenuExcluir();
-        } else if (opcaoEscolhida1.equals("1")) {
-            agenda.removerTodosContatos();
-            System.out.println("Todos os contatos foram excluídos!");
+        if (opcaoNaoSim.equals("0")) {
             mostrarMenu();
+        } else if (opcaoNaoSim.equals("1")) {
+            controller.removerTodosContatos();
+            System.out.println("Todos os contatos foram excluídos!");
         }
-    }
-
-    public void subMenuExcluir() {
-        Scanner sc = new Scanner (System.in);
-        boolean continuar = true;
-        String subMenu = "";
-
-        while (continuar) {
-            System.out.println("Escolha uma opção: ");
-            subMenu = sc.nextLine();
-
-            switch (subMenu) {
-                case "1" -> {
-                    System.out.println("Excluir um contato.");
-                    continuar = false;
-                    excluirContato();
-                }
-                case "2" -> {
-                    System.out.println("Excluir todos os contatos.");
-                    continuar = false;
-                    excluirTodosContatos();
-                }
-                case "3" -> {
-                    System.out.println("Voltar ao menu.");
-                    mostrarMenu();
-                    continuar = false;
-                }
-                default -> System.out.println("Opção inválida!");
-            }
-        }
-    }
-
-    public static String validarOpcoes (Integer quantidadeOpcoes, String opcaoEscolhida, String mensagem) {
-        Scanner sc = new Scanner (System.in);
-        boolean continuar = true;
-
-        while (continuar) {
-            for (int i = 0; i < quantidadeOpcoes; i++) {
-                if (opcaoEscolhida.equals(Integer.toString(i))) {
-                    return opcaoEscolhida;
-                }
-            }
-            System.out.println("Opção inválida.");
-            System.out.println(mensagem);
-            opcaoEscolhida = sc.nextLine();
-        }
-        return "Erro. Inicie o programa novamente.";
     }
 
 
