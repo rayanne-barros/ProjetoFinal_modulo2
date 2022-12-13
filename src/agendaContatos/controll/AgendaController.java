@@ -232,14 +232,45 @@ public class AgendaController {
         System.out.println("Foi/Foram apagado(s) " + quantidadeApagados + " endereço(s).");
     }
 
+    // Exibir todas as informações de um contato da agenda
+
+    public void exibirTodasInformacoesContato(Contatos contato) {
+
+        System.out.println("\nNOME: " + contato.getNomeCompleto().toUpperCase());
+        System.out.println("TIPO DE CONTATO: " + contato.getTipo());
+
+        System.out.println("\nTelefones: \n");
+        contato.getTelefones().stream().forEach(telefone -> {
+            Integer id = contato.getTelefones().indexOf(telefone);
+            System.out.println("\nIDENTIFICADOR: " + id);
+            System.out.println("TELEFONE: " + telefone.getDdd() + " " + telefone.getNumero() );
+            System.out.println("TIPO DE TELEFONE: " + telefone.getTipo());
+        });
+
+        System.out.println("\nEndereços: \n");
+        contato.getEnderecos().stream().forEach(endereco -> {
+            Integer id = contato.getEnderecos().indexOf(endereco);
+            System.out.println("\nIDENTIFICADOR: " + id);
+            System.out.println("RUA: " + endereco.getLogradouro());
+            System.out.println("NÚMERO: " + endereco.getNumero());
+            System.out.println("CEP: " + endereco.getCep());
+            System.out.println("MUNICIPIO: " + endereco.getCidade() + " - " + endereco.getEstado());
+            System.out.println("TIPO DE ENDEREÇO: " + endereco.getTipo());
+            System.out.println();
+        });
+    }
     public void listarTodosTelefonesContato(Contatos contato) {
         contato.getTelefones().forEach(telefone -> {
+            Integer id = contato.getTelefones().indexOf(telefone);
+            System.out.println("\nIDENTIFICADOR: " + id);
             System.out.println("Telefone: " + telefone.getTelefoneCompleto());
         });
     }
 
     public void listarTodosEnderecosContato(Contatos contato) {
         contato.getEnderecos().forEach(endereco -> {
+            Integer id = contato.getEnderecos().indexOf(endereco);
+            System.out.println("\nIDENTIFICADOR: " + id);
             System.out.println("Endereço: " + endereco.getEnderecoCompleto());
         });
     }
