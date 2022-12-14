@@ -17,12 +17,14 @@ import java.util.stream.Collectors;
 
 public class AgendaController {
 
+    int width = 85;
     Scanner sc = new Scanner(System.in);
 
     private Agenda agenda = new Agenda();
 
 
     public void adicionarContato() {  // letra a
+        ConsoleUIHelper.drawLine(width);
         Contatos contato = new Contatos("", "", TipoContato.PESSOAL);
 
         System.out.print("\nDIGITE O NOME DO CONTATO: ");
@@ -42,15 +44,18 @@ public class AgendaController {
             if (agenda.getContatos().get(i).equals(contato)) {
                 System.out.println("Esse contato já foi cadastrado!");
                 contatoRepetido = true;
+                ConsoleUIHelper.drawLine(width);
             }
         }
         if (!contatoRepetido) {
             agenda.addContatos(contato);
             System.out.println("Contato adicionado com sucesso!\n");
+            contato.setTelefones(mostrarMenuCadastroTelefone(contato));
+            contato.setEnderecos(mostrarMenuCadastroEndereco(contato));
+            ConsoleUIHelper.drawLine(width);
         }
 
-        contato.setTelefones(mostrarMenuCadastroTelefone(contato));
-        contato.setEnderecos(mostrarMenuCadastroEndereco(contato));
+
     }
 
     public List<Telefone> mostrarMenuCadastroTelefone(Contatos contato) {
@@ -96,13 +101,13 @@ public class AgendaController {
             if (telefones.contains(telefone))
             {
                 telefoneRepetido = true;
-                System.out.println("Este telefone já foi salvo a este contato");
+                System.out.println("Este telefone já foi salvo a este contato. Tente outro!");
             }
 
             if (!telefoneRepetido) {
                 telefones.add(telefone);
                 contato.setTelefones(telefones);
-                System.out.println("O telefone foi adicionado");
+                System.out.println("O telefone foi adicionado com sucesso!");
             }
 
 
@@ -151,9 +156,21 @@ public class AgendaController {
             System.out.println("TIPO DE ENDERECO: " + "(COMERCIAL, RESIDENCIAL, VIZINHO)");
             endereco.setTipo(sc.nextLine().toUpperCase().trim());
 
-            enderecos.add(endereco);
-            contato.setEnderecos(enderecos);
-            System.out.println("O endereço foi adicionado");
+            Boolean enderecoRepetido = false;
+
+
+            if (enderecos.contains(endereco))
+            {
+                enderecoRepetido = true;
+                System.out.println("Este endereço já foi salvo a este contato. Tente outro!");
+            }
+
+            if (!enderecoRepetido) {
+                enderecos.add(endereco);
+                contato.setEnderecos(enderecos);
+                System.out.println("O endereço foi adicionado com sucesso!");
+            }
+
 
 
 
@@ -215,13 +232,15 @@ public class AgendaController {
     public Boolean excluirTodosContatos() { // letra e
         Boolean mostrarMenu = true;
 
-        System.out.println("Você tem certeza que deseja excluir todos os contatos? (0 - Não / 1 - Sim)");
-        String opcaoNaoSim = sc.nextLine();
+        String opcaoNaoSim = ConsoleUIHelper.askSimpleInput("Você tem certeza que deseja excluir todos os contatos? (0 - Não / 1 - Sim)");
+        opcaoNaoSim = sc.nextLine();
         if (opcaoNaoSim.equals("0")) {
+            ConsoleUIHelper.drawLine(120);
             return mostrarMenu;
         } else if (opcaoNaoSim.equals("1")) {
             agenda.removerTodosContatos();
             System.out.println("Todos os contatos foram excluídos!");
+            ConsoleUIHelper.drawLine(120);
             return mostrarMenu;
         } else {
             return mostrarMenu;
@@ -230,7 +249,9 @@ public class AgendaController {
 
     public void excluirContato(Contatos contato) { // letra d
         agenda.removerContato(contato);
-        System.out.println("O contato " + contato.getNome() + " " + contato.getSobrenome() + "foi excluído.");
+        ConsoleUIHelper.askSimpleInput("\nO contato " + contato.getNome() + " " + contato.getSobrenome() + "foi excluído.\n");
+        ConsoleUIHelper.drawLine(80);
+        //System.out.println("O contato " + contato.getNome() + " " + contato.getSobrenome() + "foi excluído.");
     }
 
 
@@ -251,17 +272,17 @@ public class AgendaController {
         if (contato.getTelefones().contains(telefone))
         {
             telefoneRepetido = true;
-            System.out.println("este telefone já foi cadastrado a este contato");
+            System.out.println("Este telefone já foi cadastrado a este contato. Tente outro!");
         }
 
         if (!telefoneRepetido) {
             contato.getTelefones().add(telefone);
-            System.out.println("O telefone foi adicionado");
+            System.out.println("O telefone foi adicionado com sucesso!");
         }
     }
 
     public void adicionarEnderecoContatoExistente(Contatos contato) { // letra g
-        List<Endereco> enderecos = new ArrayList<>();
+
         Endereco endereco = new Endereco("", "", "", "", "", TipoEndereco.RESIDENCIAL);
 
         System.out.print("DIGITE A CIDADE: ");
@@ -282,9 +303,19 @@ public class AgendaController {
         System.out.println("TIPO DE ENDERECO: " + "(COMERCIAL, RESIDENCIAL, VIZINHO)");
         endereco.setTipo(sc.nextLine().toUpperCase().trim());
 
-        enderecos.add(endereco);
-        contato.setEnderecos(enderecos);
-        System.out.println("O endereço foi adicionado");
+        Boolean enderecoRepetido = false;
+
+        if (contato.getEnderecos().contains(endereco))
+        {
+            enderecoRepetido = true;
+            System.out.println("Este endereço já foi salvo a este contato. Tente outro! ");
+        }
+
+        if (!enderecoRepetido) {
+            contato.getEnderecos().add(endereco);
+            System.out.println("O endereço foi adicionado com sucesso.");
+        }
+
 
     }
 
