@@ -100,12 +100,12 @@ public class AgendaUI {
 
         switch (escolha) {
             case "1" -> excluirContato(contato);
-            case "2" -> adicionarTelefoneContato(contato);
+            case "2" ->  adicionarTelefoneContato(contato);
             case "3" -> adicionarEnderecoContato(contato);
             case "4" -> removerTelefoneContato(contato);
             case "5" -> removerEnderecoContato(contato);
             case "6" -> exibirInformacoesContato(contato);
-            case "7" -> listarTodosTelefonesContato(contato);
+            case "7" ->  listarTodosTelefonesContato(contato);
             case "8" -> listarTodosEnderecosContato(contato);
             case "9" -> exibirTodasInformacoesTelefone(contato);
             case "10" -> exibirTodasInformacoesEndereco(contato);
@@ -123,6 +123,7 @@ public class AgendaUI {
 
     public void adicionarEnderecoContato(Contatos contato) {
         controller.adicionarEnderecoContatoExistente(contato);
+        //controller.mostrarMenuCadastroEndereco(contato);
     }
 
   /*  public void adicionarTelefoneContato(Contatos contato) {

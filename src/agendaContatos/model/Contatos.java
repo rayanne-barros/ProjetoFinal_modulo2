@@ -15,9 +15,14 @@ public class Contatos {
     private List<Endereco> enderecos;
 
 
-    public Contatos(String nome, String sobrenome, TipoContato tipo) {
+    public Contatos(String nome, String sobrenome) {
         this.nome = nome;
         this.sobrenome = sobrenome;
+    }
+    public Contatos(String nome, String sobrenome, TipoContato tipo) {
+        this(nome, sobrenome);
+//        this.nome = nome;
+//        this.sobrenome = sobrenome;
         this.tipo = tipo;
     }
 
