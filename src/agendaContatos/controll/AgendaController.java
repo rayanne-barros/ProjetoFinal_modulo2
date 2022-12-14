@@ -51,7 +51,8 @@ public class AgendaController {
         }
         if (!contatoRepetido) {
             agenda.addContatos(contato);
-            System.out.println("Contato adicionado com sucesso!\n");
+            ConsoleUIHelper.drawWithPadding("Contato adicionado com sucesso!", width);
+
         }
     }
 
@@ -60,29 +61,25 @@ public class AgendaController {
         List<Telefone> telefones = new ArrayList<>();
 
         do {
-
-            System.out.println("\nDESEJA ADICIONAR TELEFONE? ");
-
-            System.out.println("1-  SIM");
-            System.out.println("0 - NÃO");
-
-            System.out.print("DIGITE SUA OPÇÃO: ");
-
+            ConsoleUIHelper.drawLine(width);
+            ConsoleUIHelper.drawWithPadding("DESEJA ADICIONAR TELEFONE?", width);
+            ConsoleUIHelper.drawWithPadding("1 - SIM", width);
+            ConsoleUIHelper.drawWithPadding("0 - NÃO", width);
+            ConsoleUIHelper.drawLine(width);
+            System.out.print("DIGITE SUA OPÇÃO:");
             String opcao = sc.nextLine();
+
 
             if (opcao.equals("0")) {
                 break;
             }
 
             Telefone telefone = new Telefone("", "", TipoTelefone.CELULAR);
-
             System.out.print("DIGITE O DDD: ");
             telefone.setDdd(sc.nextLine().trim());
-
-            System.out.print("DIGITE O NUMERO: ");
+            System.out.print("DIGITE O NUMERO:");
             telefone.setNumero(sc.nextLine().trim());
-
-            System.out.println("TIPO DE TELEFONE:  " + "(CELULAR, COMERCIAL, RESIDENCIAL)");
+            System.out.println("TIPO DE TELEFONE: (CELULAR, COMERCIAL, RESIDENCIAL)");
             telefone.setTipo(sc.nextLine().toUpperCase().trim());
 
             telefones.add(telefone);
@@ -99,13 +96,12 @@ public class AgendaController {
         List<Endereco> enderecos = new ArrayList<>();
 
         do {
-            System.out.println("\nDESEJA ADICIONAR ENDEREÇO?");
-
-            System.out.println("1-  SIM");
-            System.out.println("0 - NÃO");
-
-            System.out.print("DIGITE SUA OPÇÃO: ");
-
+            ConsoleUIHelper.drawLine(width);
+            ConsoleUIHelper.drawWithPadding("DESEJA ADICIONAR ENDEREÇO?", width);
+            ConsoleUIHelper.drawWithPadding("1 - SIM", width);
+            ConsoleUIHelper.drawWithPadding("0 - NÃO", width);
+            ConsoleUIHelper.drawLine(width);
+            System.out.print("DIGITE SUA OPÇÃO:");
             String opcao = sc.nextLine();
 
             if (opcao.equals("0")) {
@@ -123,13 +119,13 @@ public class AgendaController {
             System.out.print("DIGITE O LOGRADOURO: ");
             endereco.setLogradouro(sc.nextLine().trim());
 
-            System.out.print("DIGITE O NUMERO DA CASA: ");
+            System.out.print("DIGITE O NUMERO DA CASA:");
             endereco.setNumero(sc.nextLine().trim());
 
-            System.out.print("DIGITE O ESTADO: ");
+            System.out.print("DIGITE O ESTADO:");
             endereco.setEstado(sc.nextLine().trim());
 
-            System.out.println("TIPO DE ENDERECO: " + "(COMERCIAL, RESIDENCIAL, VIZINHO)");
+            System.out.println("TIPO DE ENDERECO: (COMERCIAL, RESIDENCIAL, VIZINHO)");
             endereco.setTipo(sc.nextLine().toUpperCase().trim());
 
             enderecos.add(endereco);
@@ -140,6 +136,8 @@ public class AgendaController {
 
 
     public Contatos listarContatos() {
+        ConsoleUIHelper.drawLine(width);
+        //ConsoleUIHelper.drawWithPadding("DIGITE O CEP: ", width);
         System.out.println("Contatos cadastrados: \n");
 
         for (int i = 0; i < agenda.getContatos().size(); i++) {
@@ -153,14 +151,17 @@ public class AgendaController {
         System.out.println("\nO contato escolhido foi " + contato.getNome() + " " + contato.getSobrenome() + ".\n");
 
         return contato;
+        //ConsoleUIHelper.drawLine(width);
     }
 
     public Contatos pesquisarContatos() {
+        ConsoleUIHelper.drawLine(width);
         System.out.println("Qual o nome do contato? ");
         System.out.print(">>> ");
         String nome = sc.nextLine();
         List<Contatos> cttEncontrados = encontrarContato(nome);
         System.out.println("Contato(s) localizado(s): \n");
+        ConsoleUIHelper.drawLine(width);
 
         for (int i = 0; i < cttEncontrados.size(); i++) {
             System.out.println("IDENTIFICADOR: " + i + "Nome: " + cttEncontrados.get(i).getNome().toUpperCase() + " " + cttEncontrados.get(i).getSobrenome().toUpperCase());

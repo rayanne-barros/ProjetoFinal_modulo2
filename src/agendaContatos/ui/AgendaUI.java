@@ -31,7 +31,10 @@ public class AgendaUI {
             ConsoleUIHelper.drawWithPadding("0 - Sair do Programa ", width);
             ConsoleUIHelper.fillVSpace(0, width);
             ConsoleUIHelper.drawLine(width);
-            System.out.print("\nOpção escolhida: ");
+
+            System.out.print("Escolha uma opção:  ");
+
+
             String opcao = sc.nextLine();
 
             switch (opcao) {
@@ -55,7 +58,8 @@ public class AgendaUI {
                     continuar = false;
                     break;
                 default:  {
-                    System.out.println("Opção invalida");
+                    ConsoleUIHelper.drawWithPadding("Opção invalida!", width);
+
                     ConsoleUIHelper.drawLine(width);
                     System.out.println();
                 }
@@ -81,10 +85,8 @@ public class AgendaUI {
     }
 
     public void subMenu(Contatos contato) {
-        ConsoleUIHelper.drawLine(width);
-        ConsoleUIHelper.drawWithPadding("Escolha uma opção para realizar no contato " + contato.getNome() + " " + contato.getSobrenome() + ": ", width);
-        //System.out.print("Escolha uma opção para realizar no contato " + contato.getNome() + " " + contato.getSobrenome() + ": ");
-        ConsoleUIHelper.drawLine(width);
+        ConsoleUIHelper.drawHeader("SUBMENU", width);
+
         ConsoleUIHelper.drawWithPadding("1 - Excluir contato", width);
         ConsoleUIHelper.drawWithPadding("2 - Adicionar um telefone", width);
         ConsoleUIHelper.drawWithPadding("3 - Adicionar um endereço", width);
@@ -95,6 +97,9 @@ public class AgendaUI {
         ConsoleUIHelper.drawWithPadding("8 - Listar todos os endereços do contato", width);
         ConsoleUIHelper.drawWithPadding("0 - Voltar ao menu", width);
         ConsoleUIHelper.drawLine(width);
+
+        System.out.println("Escolha uma opção para realizar no contato: " + contato.getNome() + " " + contato.getSobrenome() + ": ");
+        String escolha = sc.nextLine();
       /*
 
       "Exibir todas as informações de telefone e endereço" não é uma escolha no menu. Motivo: ao listar o telefone já mostrar todos os índices,
@@ -105,7 +110,6 @@ public class AgendaUI {
       System.out.println("2 - Exibir todas as informações de um endereço de um contato da agenda");
 
        */
-        String escolha = sc.nextLine();
 
         switch (escolha) {
             case "1" -> excluirContato(contato);
