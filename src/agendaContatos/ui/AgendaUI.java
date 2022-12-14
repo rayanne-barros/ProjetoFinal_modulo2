@@ -40,7 +40,7 @@ public class AgendaUI {
             switch (opcao) {
                 case "1":
                     adicionarContato();
-                    mostrarMenu();
+                    //mostrarMenu();
                     break;
                 case "2":
                     subMenu(listarContatos());
@@ -95,6 +95,8 @@ public class AgendaUI {
         ConsoleUIHelper.drawWithPadding("6 - Exibir todas as informações do contato", width);
         ConsoleUIHelper.drawWithPadding("7 - Listar todos os telefones do contato", width);
         ConsoleUIHelper.drawWithPadding("8 - Listar todos os endereços do contato", width);
+        ConsoleUIHelper.drawWithPadding("9 - Exibir todas informações de um telefone", width);
+        ConsoleUIHelper.drawWithPadding("10 - Exibir todas informações de um endereço", width);
         ConsoleUIHelper.drawWithPadding("0 - Voltar ao menu", width);
         ConsoleUIHelper.drawLine(width);
 
@@ -120,6 +122,8 @@ public class AgendaUI {
             case "6" -> exibirInformacoesContato(contato);
             case "7" -> listarTodosTelefonesContato(contato);
             case "8" -> listarTodosEnderecosContato(contato);
+            case "9" -> exibirTodasInformacoesTelefone(contato);
+            case "10" -> exibirTodasInformacoesEndereco(contato);
             case "0" -> mostrarMenu();
         }
     }
@@ -161,10 +165,18 @@ public class AgendaUI {
 
     public void listarTodosTelefonesContato(Contatos contato) {
         controller.listarTodosTelefonesContato(contato);
+        controller.exibirTodasInformacoesTelefone(contato);
     }
 
     public void listarTodosEnderecosContato(Contatos contato) {
         controller.listarTodosEnderecosContato(contato);
+    }
+
+    public void exibirTodasInformacoesTelefone(Contatos contato){
+        controller.exibirTodasInformacoesTelefone(contato);
+    }
+    public void exibirTodasInformacoesEndereco(Contatos contato){
+        controller.exibirTodasInformacoesEndereco(contato);
     }
 
 }
