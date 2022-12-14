@@ -73,14 +73,7 @@ public class Endereco {
         this.estado = estado;
     }
 
-//    public String getEnderecoCompleto() {
-//        String valor = logradouro;
-//        if (!numero.isBlank() && !cidade.isBlank()) {
-//            valor += "," + numero;
-//        }
-//        return valor.trim();
-//
-//    }
+
 
     @Override
     public boolean equals(Object o) {

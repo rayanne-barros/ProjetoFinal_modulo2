@@ -33,10 +33,12 @@ public class AgendaController {
         System.out.print("DIGITE O SOBRENOME DO CONTATO: ");
         contato.setSobrenome(sc.nextLine().trim().toUpperCase());
 
-        System.out.println("DIGITE O TIPO DO CONTATO: " + "(PESSOAL, PROFISSIONAL)");
-        contato.setTipo(sc.nextLine().toUpperCase().trim());
+        try {System.out.println("DIGITE O TIPO DO CONTATO: " + "(PESSOAL, PROFISSIONAL)");
+        contato.setTipo(sc.nextLine().toUpperCase().trim());}
+        catch (Exception e) {
+        }
 
-        // Implementando a Regra de negócio
+        // Implementando a 1° Regra de negócio
 
         Boolean contatoRepetido = false;
 
@@ -65,14 +67,15 @@ public class AgendaController {
 
         do {
 
-            System.out.println("\nDESEJA ADICIONAR TELEFONE? ");
-
-            System.out.println("1-  SIM");
-            System.out.println("0 - NÃO");
-
-            System.out.print("DIGITE SUA OPÇÃO: ");
-
+            ConsoleUIHelper.drawLine(width);
+            ConsoleUIHelper.drawWithPadding("DESEJA ADICIONAR TELEFONE?", width);
+            ConsoleUIHelper.drawWithPadding("1 - SIM", width);
+            ConsoleUIHelper.drawWithPadding("0 - NÃO", width);
+            ConsoleUIHelper.drawLine(width);
+            System.out.print("DIGITE SUA OPÇÃO:");
             String opcao = sc.nextLine();
+
+
 
             if (opcao.equals("0")) {
                 break;
@@ -86,14 +89,10 @@ public class AgendaController {
             System.out.print("DIGITE O NUMERO: ");
             telefone.setNumero(sc.nextLine().trim());
 
-            System.out.println("TIPO DE TELEFONE:  " + "(CELULAR, COMERCIAL, RESIDENCIAL)");
-            telefone.setTipo(sc.nextLine().toUpperCase().trim());
+            try {System.out.println("TIPO DE TELEFONE:  " + "(CELULAR, COMERCIAL, RESIDENCIAL)");
+            telefone.setTipo(sc.nextLine().toUpperCase().trim()); }
+            catch (Exception e) {}
 
-            //Criar uma regra pra ver se o numero já está inserido nos numeros do contato, caso contrario, permite salvar
-
-            //cria uma validação pra ver se na lista de telefones - telefones - existe o numero que voce está tentando salvar agora - telefone -
-            //se existe -> printa "esse telefone já foi adicionado.
-            // se não existe -> printa telefone adicionado com sucesso e coloca o - telefone- tanto na agenda dentro do contato, quanto no array - telefones -
 
             Boolean telefoneRepetido = false;
 
@@ -123,13 +122,12 @@ public class AgendaController {
         List<Endereco> enderecos = new ArrayList<>();
 
         do {
-            System.out.println("\nDESEJA ADICIONAR ENDEREÇO? \n");
-
-            System.out.println("1-  SIM");
-            System.out.println("0 - NÃO");
-
-            System.out.print("DIGITE SUA OPÇÃO: ");
-
+            ConsoleUIHelper.drawLine(width);
+            ConsoleUIHelper.drawWithPadding("DESEJA ADICIONAR ENDEREÇO?", width);
+            ConsoleUIHelper.drawWithPadding("1 - SIM", width);
+            ConsoleUIHelper.drawWithPadding("0 - NÃO", width);
+            ConsoleUIHelper.drawLine(width);
+            System.out.print("DIGITE SUA OPÇÃO:");
             String opcao = sc.nextLine();
 
             if (opcao.equals("0")) {
@@ -153,8 +151,9 @@ public class AgendaController {
             System.out.print("DIGITE O ESTADO: ");
             endereco.setEstado(sc.nextLine().trim());
 
-            System.out.println("TIPO DE ENDERECO: " + "(COMERCIAL, RESIDENCIAL, VIZINHO)");
-            endereco.setTipo(sc.nextLine().toUpperCase().trim());
+            try{System.out.println("TIPO DE ENDERECO: " + "(COMERCIAL, RESIDENCIAL, VIZINHO)");
+            endereco.setTipo(sc.nextLine().toUpperCase().trim());}
+            catch (Exception e) {}
 
             Boolean enderecoRepetido = false;
 
@@ -251,7 +250,6 @@ public class AgendaController {
         agenda.removerContato(contato);
         ConsoleUIHelper.askSimpleInput("\nO contato " + contato.getNome() + " " + contato.getSobrenome() + "foi excluído.\n");
         ConsoleUIHelper.drawLine(80);
-        //System.out.println("O contato " + contato.getNome() + " " + contato.getSobrenome() + "foi excluído.");
     }
 
 
@@ -361,7 +359,7 @@ public class AgendaController {
         System.out.println("Foi/Foram apagado(s) " + quantidadeApagados + " endereço(s).");
     }
 
-    // Exibir todas as informações de um contato da agenda
+
 
     public void exibirTodasInformacoesContato(Contatos contato) { // letra j
 
@@ -396,12 +394,7 @@ public class AgendaController {
             System.out.println("\nIDENTIFICADOR: " + id);
             System.out.println("Telefone: " + telefone.getTelefoneCompleto());
         });
-        /*System.out.println("Escolha um Telefone pelo identificador para exibir todas informações? ");
-        System.out.print(">>> ");
-        int opcao = sc.nextInt();
-        sc.nextLine();
 
-        exibirTodasInformacoesTelefone(contato);*/
     }
 
     public void listarTodosEnderecosContato(Contatos contato) { // letra l
@@ -420,7 +413,8 @@ public class AgendaController {
         contatos.getTelefones().stream().forEach(telefone -> {
             Integer id = contatos.getTelefones().indexOf(telefone);
             System.out.println("\nIDENTIFICADOR: " + id);
-            System.out.println("TELEFONE: " + telefone.getDdd() + " " + telefone.getNumero() );
+            System.out.println("DDD: " + telefone.getDdd());
+            System.out.println("NÚMERO: " + telefone.getNumero());
             System.out.println("TIPO DE TELEFONE: " + telefone.getTipo());
         });
 
