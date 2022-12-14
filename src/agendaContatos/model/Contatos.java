@@ -20,9 +20,9 @@ public class Contatos {
         this.sobrenome = sobrenome;
     }
     public Contatos(String nome, String sobrenome, TipoContato tipo) {
-        this(nome, sobrenome);
-//        this.nome = nome;
-//        this.sobrenome = sobrenome;
+
+        this.nome = nome;
+        this.sobrenome = sobrenome;
         this.tipo = tipo;
     }
 
