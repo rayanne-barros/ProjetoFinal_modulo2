@@ -82,18 +82,52 @@ public class AgendaController {
 
             System.out.println("TIPO DE TELEFONE:  " + "(CELULAR, COMERCIAL, RESIDENCIAL)");
             telefone.setTipo(sc.nextLine().toUpperCase().trim());
+            Boolean telefoneRepetido = false;
 
-            Boolean contatoRepetido = false;
-            for (int i = 0; i < agenda.getTelefones().size(); i++) {
-                if (agenda.getTelefones().get(i).equals(telefone)) {
+//            //region Validando se existe apenas um telefone por usuário
+//            for (int i = 0; i < agenda.getTelefones().size(); i++) {
+//                if (agenda.getTelefones().get(i).equals(telefone)) {//
+//
+//                    for (int j=0;j < agenda.getContatos().size(); j++){
+//                        if (agenda.getContatos().get(j).equals(contato)) {
+//                            System.out.println("Esse contato já foi salvo previamente");
+//
+//                            break;
+//                        }
+//                    }
+//
+//                    System.out.println("Esse telefone já existe!");
+//                    telefoneRepetido = true;
+//                }
+//            }
+            //endregion
 
+            //region Validando se o telefone repetido não é do mesmo usuario. (outros podem ter)
 
+            for (int i = 0; i < agenda.getTelefones().size(); i++){
+                if (agenda.getTelefones().get(i).equals(telefone) && agenda.getContatos().size() == 0){
 
-                    System.out.println("Esse telefone já existe nesse contato!");
-                    contatoRepetido = true;
+                    System.out.println("Telefone já salvo a este contato");
+                    telefoneRepetido = true;
+                    break;
+                } else if (agenda.getTelefones().get(i).equals(telefone) && agenda.getContatos().size() > 0)
+                {
+                      for (int j = 0 ; j < agenda.getContatos().size(); j++)
+                      {
+                          if(agenda.getContatos().get(j).equals(contato))
+                          {
+                              System.out.println("Telefone já salvo no contato");
+                              telefoneRepetido = true;
+                              break;
+                          }
+                      }
                 }
             }
-            if (!contatoRepetido) {
+
+
+            //endregion
+
+            if (!telefoneRepetido) {
                 agenda.getContatos().stream()
                         .filter(cont -> cont.equals(contato))
                         .map(cont -> cont.getTelefones().add(telefone))
