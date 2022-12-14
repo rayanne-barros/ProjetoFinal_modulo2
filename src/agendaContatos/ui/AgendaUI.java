@@ -2,12 +2,16 @@ package agendaContatos.ui;
 
 import agendaContatos.controll.AgendaController;
 import agendaContatos.model.Contatos;
+import agendaContatos.util.ConsoleUIHelper;
 
 import java.util.Scanner;
 
 public class AgendaUI {
+
     AgendaController controller = new AgendaController();
     static final Scanner sc = new Scanner(System.in);
+    char pad = '#';
+    int width = 85;
     private Integer tamanhoPagina;
     private Integer posicaoAtual;
 
@@ -15,36 +19,50 @@ public class AgendaUI {
         Boolean continuar = true;
 
         do {
-            System.out.print("""
-                    Digite a opção que você deseja: 
-                    
-                    1 - Adicionar Contato
-                    2 - Listar contatos
-                    3 - Buscar Contato
-                    4 - Remover todos os contatos
-                    0 - Sair do Programa                    
-                    """);
+            ConsoleUIHelper.drawHeader("AGENDA", width);
+            //ConsoleUIHelper.fillVSpace(0, width);
+            ConsoleUIHelper.drawWithPadding("Olá! Bem vindo(a) a sua agenda!", width);
+            ConsoleUIHelper.drawWithPadding("Escolha uma opção!", width);
+            ConsoleUIHelper.fillVSpace(0, width);
+            ConsoleUIHelper.drawWithPadding("1 - Adicionar Contato", width);
+            ConsoleUIHelper.drawWithPadding("2 - Listar contatos", width);
+            ConsoleUIHelper.drawWithPadding("3 - Buscar Contato", width);
+            ConsoleUIHelper.drawWithPadding("4 - Remover todos os contatos", width);
+            ConsoleUIHelper.drawWithPadding("0 - Sair do Programa ", width);
+            ConsoleUIHelper.fillVSpace(0, width);
+            ConsoleUIHelper.drawLine(width);
+
+            System.out.print("Escolha uma opção:  ");
+
 
             String opcao = sc.nextLine();
 
             switch (opcao) {
                 case "1":
                     adicionarContato();
-                    //mostrarMenu();
+
                     break;
                 case "2":
                     subMenu(listarContatos());
                     break;
                 case "3":
                     subMenu(pesquisarContatos());
+
                     break;
                 case "4":
                     excluirTodosContatos();
-                    //mostrarMenu();
+
+
                     break;
                 case "0":
                     continuar = false;
                     break;
+                default:  {
+                    ConsoleUIHelper.drawWithPadding("Opção invalida!", width);
+
+
+                    System.out.println();
+                }
             }
 
         } while (continuar);
@@ -52,7 +70,6 @@ public class AgendaUI {
 
     private void adicionarContato() {
         controller.adicionarContato();
-
     }
 
     public Contatos listarContatos() {
@@ -68,24 +85,23 @@ public class AgendaUI {
     }
 
     public void subMenu(Contatos contato) {
+        ConsoleUIHelper.drawHeader("SUBMENU", width);
 
-        System.out.print("Escolha uma opção para realizar no contato " + contato.getNome() + " " + contato.getSobrenome() + ": ");
-        System.out.println("""                
-                                
-                 1 - Excluir contato
-                 2 - Adicionar um telefone
-                 3 - Adicionar um endereço
-                 4 - Remover um telefone
-                 5 - Remover um endereço
-                 6 - Exibir todas as informações do contato
-                 7 - Listar todos os telefones do contato
-                 8 - Listar todos os endereços do contato
-                 9 - Exibir todas informações de um telefone
-                10 - Exibir todas informações de um endereço
-                 0 - Voltar ao menu
-                """);
+        ConsoleUIHelper.drawWithPadding("1 - Excluir contato", width);
+        ConsoleUIHelper.drawWithPadding("2 - Adicionar um telefone", width);
+        ConsoleUIHelper.drawWithPadding("3 - Adicionar um endereço", width);
+        ConsoleUIHelper.drawWithPadding("4 - Remover um telefone", width);
+        ConsoleUIHelper.drawWithPadding("5 - Remover um endereço", width);
+        ConsoleUIHelper.drawWithPadding("6 - Exibir todas as informações do contato", width);
+        ConsoleUIHelper.drawWithPadding("7 - Listar todos os telefones do contato", width);
+        ConsoleUIHelper.drawWithPadding("8 - Listar todos os endereços do contato", width);
+        ConsoleUIHelper.drawWithPadding("9 - Exibir todas informações de um telefone", width);
+        ConsoleUIHelper.drawWithPadding("10 - Exibir todas informações de um endereço", width);
+        ConsoleUIHelper.drawWithPadding("0 - Voltar ao menu", width);
+        ConsoleUIHelper.drawLine(width);
 
-
+        System.out.println("Escolha uma opção para realizar no contato: " + contato.getNome() + " " + contato.getSobrenome() + ": ");
+        String escolha = sc.nextLine();
       /*
 
       "Exibir todas as informações de telefone e endereço" não é uma escolha no menu. Motivo: ao listar o telefone já mostrar todos os índices,
@@ -96,7 +112,6 @@ public class AgendaUI {
       System.out.println("2 - Exibir todas as informações de um endereço de um contato da agenda");
 
        */
-        String escolha = sc.nextLine();
 
         switch (escolha) {
             case "1" -> excluirContato(contato);
@@ -150,7 +165,7 @@ public class AgendaUI {
 
     public void listarTodosTelefonesContato(Contatos contato) {
         controller.listarTodosTelefonesContato(contato);
-        controller.exibirTodasInformacoesTelefone(contato);
+
     }
 
     public void listarTodosEnderecosContato(Contatos contato) {
