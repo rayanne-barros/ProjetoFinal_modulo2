@@ -1,4 +1,4 @@
-# JAVA POOI MÓDULO 2- Santander Coders  
+# JAVA POOI MÓDULO 2- Santander Coders
 
 ## Integrantes do grupo
 <ul>
@@ -45,7 +45,7 @@ Ações adicionais que podem ser incluídas na Agenda como um bônus:
    
 
 ```
- 
+
 
 #### Regras de Negócio:
 

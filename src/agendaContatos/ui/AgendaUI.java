@@ -30,7 +30,7 @@ public class AgendaUI {
             switch (opcao) {
                 case "1":
                     adicionarContato();
-                    mostrarMenu();
+                    //mostrarMenu();
                     break;
                 case "2":
                     subMenu(listarContatos());
@@ -40,7 +40,7 @@ public class AgendaUI {
                     break;
                 case "4":
                     excluirTodosContatos();
-                    mostrarMenu();
+                    //mostrarMenu();
                     break;
                 case "0":
                     continuar = false;
@@ -72,15 +72,17 @@ public class AgendaUI {
         System.out.print("Escolha uma opção para realizar no contato " + contato.getNome() + " " + contato.getSobrenome() + ": ");
         System.out.println("""                
                                 
-                1 - Excluir contato
-                2 - Adicionar um telefone
-                3 - Adicionar um endereço
-                4 - Remover um telefone
-                5 - Remover um endereço
-                6 - Exibir todas as informações do contato
-                7 - Listar todos os telefones do contato
-                8 - Listar todos os endereços do contato
-                0 - Voltar ao menu
+                 1 - Excluir contato
+                 2 - Adicionar um telefone
+                 3 - Adicionar um endereço
+                 4 - Remover um telefone
+                 5 - Remover um endereço
+                 6 - Exibir todas as informações do contato
+                 7 - Listar todos os telefones do contato
+                 8 - Listar todos os endereços do contato
+                 9 - Exibir todas informações de um telefone
+                10 - Exibir todas informações de um endereço
+                 0 - Voltar ao menu
                 """);
 
 
@@ -105,6 +107,8 @@ public class AgendaUI {
             case "6" -> exibirInformacoesContato(contato);
             case "7" -> listarTodosTelefonesContato(contato);
             case "8" -> listarTodosEnderecosContato(contato);
+            case "9" -> exibirTodasInformacoesTelefone(contato);
+            case "10" -> exibirTodasInformacoesEndereco(contato);
             case "0" -> mostrarMenu();
         }
     }
@@ -146,10 +150,18 @@ public class AgendaUI {
 
     public void listarTodosTelefonesContato(Contatos contato) {
         controller.listarTodosTelefonesContato(contato);
+        controller.exibirTodasInformacoesTelefone(contato);
     }
 
     public void listarTodosEnderecosContato(Contatos contato) {
         controller.listarTodosEnderecosContato(contato);
+    }
+
+    public void exibirTodasInformacoesTelefone(Contatos contato){
+        controller.exibirTodasInformacoesTelefone(contato);
+    }
+    public void exibirTodasInformacoesEndereco(Contatos contato){
+        controller.exibirTodasInformacoesEndereco(contato);
     }
 
 }

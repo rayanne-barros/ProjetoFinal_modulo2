@@ -6,9 +6,19 @@ import java.util.Objects;
 
 public class Agenda {
     private List<Contatos> contatos = new ArrayList<>();
+    private List<Telefone> telefones = new ArrayList<>();
+    private List<Endereco> enderecos = new ArrayList<>();
 
     public List<Contatos> getContatos() {
         return contatos;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
     public void addContatos(Contatos contato) {// FUNCAO PARA ADD CONTATO E NAO A LISTA INTEIRA

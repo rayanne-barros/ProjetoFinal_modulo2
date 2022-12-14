@@ -32,7 +32,7 @@ public class Endereco {
         this.tipo = TipoEndereco.valueOf(tipo);
     }
 
-   public String getCep() {
+    public String getCep() {
         return cep;
     }
 
