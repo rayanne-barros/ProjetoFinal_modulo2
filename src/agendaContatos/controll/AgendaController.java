@@ -57,7 +57,7 @@ public class AgendaController {
 
         do {
 
-            System.out.println("\nDESEJA ADCIONAR TELEFONE? ");
+            System.out.println("\nDESEJA ADICIONAR TELEFONE? ");
 
             System.out.println("1-  SIM");
             System.out.println("0 - NÃO");
@@ -95,7 +95,7 @@ public class AgendaController {
         List<Endereco> enderecos = new ArrayList<>();
 
         do {
-            System.out.println("\nDESEJA ADCIONAR ENDEREÇO? \n");
+            System.out.println("\nDESEJA ADICIONAR ENDEREÇO? \n");
 
             System.out.println("1-  SIM");
             System.out.println("0 - NÃO");
@@ -287,6 +287,61 @@ public class AgendaController {
             System.out.println("\nIDENTIFICADOR: " + id);
             System.out.println("Endereço: " + endereco.getEnderecoCompleto());
         });
+    }
+
+    public void adicionarEnderecoContatoExistente(Contatos contato) {
+        Endereco endereco = new Endereco("", "", "", "", "", TipoEndereco.RESIDENCIAL);
+
+        System.out.print("DIGITE A CIDADE: ");
+        endereco.setCidade(sc.nextLine().trim());
+
+        System.out.print("DIGITE O CEP: ");
+        endereco.setCep(sc.nextLine().trim());
+
+        System.out.print("DIGITE O LOGRADOURO: ");
+        endereco.setLogradouro(sc.nextLine().trim());
+
+        System.out.print("DIGITE O NUMERO DA CASA: ");
+        endereco.setNumero(sc.nextLine().trim());
+
+        System.out.print("DIGITE O ESTADO: ");
+        endereco.setEstado(sc.nextLine().trim());
+
+        System.out.println("TIPO DE ENDERECO: " + "(COMERCIAL, RESIDENCIAL, VIZINHO)");
+        endereco.setTipo(sc.nextLine().toUpperCase().trim());
+
+
+
+        agenda.getContatos().stream()
+                .filter(cont -> cont.equals(contato))
+                .map(cont -> cont.getEnderecos().add(endereco))
+                .count();
+
+        System.out.println("O endereço foi adicionado");
+
+    }
+
+    public void adicionarTelefoneEmContatoExistente(Contatos contato) {
+        Telefone telefone = new Telefone("", "", TipoTelefone.CELULAR);
+
+        System.out.print("DIGITE O DDD: ");
+        telefone.setDdd(sc.nextLine().trim());
+
+        System.out.print("DIGITE O NUMERO: ");
+        telefone.setNumero(sc.nextLine().trim());
+
+        System.out.println("TIPO DE TELEFONE:  " + "(CELULAR, COMERCIAL, RESIDENCIAL)");
+        telefone.setTipo(sc.nextLine().toUpperCase().trim());
+
+
+        long quantidadeApagados = agenda.getContatos().stream()
+                .filter(cont -> cont.equals(contato))
+                .map(cont -> cont.getTelefones().add(telefone))
+                .count();
+
+        System.out.println("Foi adicionado " + quantidadeApagados + " telefone");
+
+
     }
 
 }
