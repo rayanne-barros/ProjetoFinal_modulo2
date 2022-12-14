@@ -21,7 +21,8 @@ public class AgendaController {
 
     private Agenda agenda = new Agenda();
 
-    public void adicionarContato() {
+
+    public void adicionarContato() {  // letra a
         Contatos contato = new Contatos("", "", TipoContato.PESSOAL);
 
         System.out.print("\nDIGITE O NOME DO CONTATO: ");
@@ -33,11 +34,11 @@ public class AgendaController {
         System.out.println("DIGITE O TIPO DO CONTATO: " + "(PESSOAL, PROFISSIONAL)");
         contato.setTipo(sc.nextLine().toUpperCase().trim());
 
-        contato.setTelefones(mostrarMenuCadastroTelefone());
-        contato.setEnderecos(mostrarMenuCadastroEndereco());
+        contato.setTelefones(mostrarMenuCadastroTelefone(contato));
+        contato.setEnderecos(mostrarMenuCadastroEndereco(contato));
 
-        /* Implementando a Regra de negócio
-         */
+        // Implementando a Regra de negócio
+
         Boolean contatoRepetido = false;
 
         for (int i = 0; i < agenda.getContatos().size(); i++) {
@@ -52,7 +53,7 @@ public class AgendaController {
         }
     }
 
-    public List<Telefone> mostrarMenuCadastroTelefone() {
+    public List<Telefone> mostrarMenuCadastroTelefone(Contatos contato) {
         Boolean continuar = true;
         List<Telefone> telefones = new ArrayList<>();
 
@@ -82,14 +83,33 @@ public class AgendaController {
             System.out.println("TIPO DE TELEFONE:  " + "(CELULAR, COMERCIAL, RESIDENCIAL)");
             telefone.setTipo(sc.nextLine().toUpperCase().trim());
 
-            telefones.add(telefone);
+            Boolean contatoRepetido = false;
+            for (int i = 0; i < agenda.getTelefones().size(); i++) {
+                if (agenda.getTelefones().get(i).equals(telefone)) {
+
+
+
+                    System.out.println("Esse telefone já existe nesse contato!");
+                    contatoRepetido = true;
+                }
+            }
+            if (!contatoRepetido) {
+                agenda.getContatos().stream()
+                        .filter(cont -> cont.equals(contato))
+                        .map(cont -> cont.getTelefones().add(telefone))
+                        .count();
+               agenda.addTelefones(telefone);
+
+                telefones.add(telefone);
+                System.out.println("O telefone foi adicionado");
+            }
 
         } while (continuar);
 
         return telefones;
     }
 
-    public List<Endereco> mostrarMenuCadastroEndereco() {
+    public List<Endereco> mostrarMenuCadastroEndereco(Contatos contato) {
 
         Boolean continuar = true;
 
@@ -129,14 +149,30 @@ public class AgendaController {
             System.out.println("TIPO DE ENDERECO: " + "(COMERCIAL, RESIDENCIAL, VIZINHO)");
             endereco.setTipo(sc.nextLine().toUpperCase().trim());
 
-            enderecos.add(endereco);
+            Boolean contatoRepetido = false;
+
+            for (int i = 0; i < agenda.getEnderecos().size(); i++) {
+                if (agenda.getEnderecos().get(i).equals(endereco)) {
+                    System.out.println("Esse endereço já existe nesse contato!");
+                    contatoRepetido = true;
+                }
+            }
+            if (!contatoRepetido) {
+                agenda.getContatos().stream()
+                        .filter(cont -> cont.equals(contato))
+                        .map(cont -> cont.getEnderecos().add(endereco))
+                        .count();
+                agenda.addEnderecos(endereco);
+                //enderecos.add(endereco);
+                System.out.println("O endereço foi adicionado");
+            }
 
         } while (continuar);
         return enderecos;
     }
 
 
-    public Contatos listarContatos() {
+    public Contatos listarContatos() { // letra b
         System.out.println("Contatos cadastrados: ");
 
         for (int i = 0; i < agenda.getContatos().size(); i++) {
@@ -152,7 +188,7 @@ public class AgendaController {
         return contato;
     }
 
-    public Contatos pesquisarContatos() {
+    public Contatos pesquisarContatos() { // letra c
         System.out.println("Qual o nome do contato? ");
         System.out.print(">>> ");
         String nome = sc.nextLine();
@@ -186,7 +222,7 @@ public class AgendaController {
         return contatosEncontrados;
     }
 
-    public Boolean excluirTodosContatos() {
+    public Boolean excluirTodosContatos() { // letra e
         Boolean mostrarMenu = true;
 
         System.out.println("Você tem certeza que deseja excluir todos os contatos? (0 - Não / 1 - Sim)");
@@ -202,10 +238,83 @@ public class AgendaController {
         }
     }
 
-    public void excluirContato(Contatos contato) {
+    public void excluirContato(Contatos contato) { // letra d
         agenda.removerContato(contato);
         System.out.println("O contato " + contato.getNome() + " " + contato.getSobrenome() + "foi excluído.");
     }
+
+
+    public void adicionarTelefoneEmContatoExistente(Contatos contato) { // letra f
+
+        Telefone telefone = new Telefone("", "", TipoTelefone.CELULAR);
+
+        System.out.print("DIGITE O DDD: ");
+        telefone.setDdd(sc.nextLine().trim());
+
+        System.out.print("DIGITE O NUMERO: ");
+        telefone.setNumero(sc.nextLine().trim());
+
+        System.out.println("TIPO DE TELEFONE:  " + "(CELULAR, COMERCIAL, RESIDENCIAL)");
+        telefone.setTipo(sc.nextLine().toUpperCase().trim());
+
+        Boolean contatoRepetido = false;
+
+        for (int i = 0; i < agenda.getTelefones().size(); i++) {
+            if (agenda.getTelefones().get(i).equals(telefone)) {
+                System.out.println("Esse telefone já existe nesse contato!");
+                contatoRepetido = true;
+            }
+        }
+        if (!contatoRepetido) {
+            agenda.getContatos().stream()
+                    .filter(cont -> cont.equals(contato))
+                    .map(cont -> cont.getTelefones().add(telefone))
+                    .count();
+            agenda.addTelefones(telefone);
+            System.out.println("O telefone foi adicionado");
+        }
+    }
+
+    public void adicionarEnderecoContatoExistente(Contatos contato) { // letra g
+        Endereco endereco = new Endereco("", "", "", "", "", TipoEndereco.RESIDENCIAL);
+
+        System.out.print("DIGITE A CIDADE: ");
+        endereco.setCidade(sc.nextLine().trim());
+
+        System.out.print("DIGITE O CEP: ");
+        endereco.setCep(sc.nextLine().trim());
+
+        System.out.print("DIGITE O LOGRADOURO: ");
+        endereco.setLogradouro(sc.nextLine().trim());
+
+        System.out.print("DIGITE O NUMERO DA CASA: ");
+        endereco.setNumero(sc.nextLine().trim());
+
+        System.out.print("DIGITE O ESTADO: ");
+        endereco.setEstado(sc.nextLine().trim());
+
+        System.out.println("TIPO DE ENDERECO: " + "(COMERCIAL, RESIDENCIAL, VIZINHO)");
+        endereco.setTipo(sc.nextLine().toUpperCase().trim());
+
+        Boolean contatoRepetido = false;
+
+        for (int i = 0; i < agenda.getEnderecos().size(); i++) {
+            if (agenda.getEnderecos().get(i).equals(endereco)) {
+                System.out.println("Esse endereço já existe nesse contato!");
+                contatoRepetido = true;
+            }
+        }
+        if (!contatoRepetido) {
+            agenda.getContatos().stream()
+                    .filter(cont -> cont.equals(contato))
+                    .map(cont -> cont.getEnderecos().add(endereco))
+                    .count();
+            agenda.addEnderecos(endereco);
+            System.out.println("O endereço foi adicionado");
+        }
+    }
+
+
 
     public Telefone escolherTelefoneRemover(Contatos contato) {
 
@@ -220,7 +329,7 @@ public class AgendaController {
         return contato.getTelefones().get(opcao);
     }
 
-    public void removerTelefoneContato(Contatos contato) {
+    public void removerTelefoneContato(Contatos contato) { // letra h
         Telefone telefone = escolherTelefoneRemover(contato);
         long quantidadeApagados = agenda.getContatos().stream()
                 .filter(cont -> cont.equals(contato))
@@ -241,7 +350,7 @@ public class AgendaController {
         return contato.getEnderecos().get(opcao);
     }
 
-    public void removerEnderecoContato(Contatos contato) { // 9
+    public void removerEnderecoContato(Contatos contato) { // letra h
         Endereco endereco = escolherEnderecoRemover(contato);
         long quantidadeApagados = agenda.getContatos().stream().filter(cont -> cont.equals(contato)).map(cont -> cont.getEnderecos().remove(endereco)).count();
         System.out.println("Foi/Foram apagado(s) " + quantidadeApagados + " endereço(s).");
@@ -249,7 +358,7 @@ public class AgendaController {
 
     // Exibir todas as informações de um contato da agenda
 
-    public void exibirTodasInformacoesContato(Contatos contato) {
+    public void exibirTodasInformacoesContato(Contatos contato) { // letra j
 
         System.out.println("\nNOME: " + contato.getNomeCompleto().toUpperCase());
         System.out.println("TIPO DE CONTATO: " + contato.getTipo());
@@ -274,7 +383,7 @@ public class AgendaController {
             System.out.println();
         });
     }
-    public void listarTodosTelefonesContato(Contatos contato) {
+    public void listarTodosTelefonesContato(Contatos contato) { //letra k
         AgendaUI view = new AgendaUI();
         contato.getTelefones().forEach(telefone -> {
             Integer id = contato.getTelefones().indexOf(telefone);
@@ -289,70 +398,18 @@ public class AgendaController {
         exibirTodasInformacoesTelefone(contato);*/
     }
 
-    public void listarTodosEnderecosContato(Contatos contato) {
+    public void listarTodosEnderecosContato(Contatos contato) { // letra l
         contato.getEnderecos().forEach(endereco -> {
             Integer id = contato.getEnderecos().indexOf(endereco);
             System.out.println("\nIDENTIFICADOR: " + id);
-            System.out.println("Endereço: " + endereco.getEnderecoCompleto());
+            System.out.println("Logradouro: " + endereco.getLogradouro());
+            System.out.println("Número: " + endereco.getNumero());
         });
     }
 
-    public void adicionarEnderecoContatoExistente(Contatos contato) {
-        Endereco endereco = new Endereco("", "", "", "", "", TipoEndereco.RESIDENCIAL);
-
-        System.out.print("DIGITE A CIDADE: ");
-        endereco.setCidade(sc.nextLine().trim());
-
-        System.out.print("DIGITE O CEP: ");
-        endereco.setCep(sc.nextLine().trim());
-
-        System.out.print("DIGITE O LOGRADOURO: ");
-        endereco.setLogradouro(sc.nextLine().trim());
-
-        System.out.print("DIGITE O NUMERO DA CASA: ");
-        endereco.setNumero(sc.nextLine().trim());
-
-        System.out.print("DIGITE O ESTADO: ");
-        endereco.setEstado(sc.nextLine().trim());
-
-        System.out.println("TIPO DE ENDERECO: " + "(COMERCIAL, RESIDENCIAL, VIZINHO)");
-        endereco.setTipo(sc.nextLine().toUpperCase().trim());
 
 
-
-        agenda.getContatos().stream()
-                .filter(cont -> cont.equals(contato))
-                .map(cont -> cont.getEnderecos().add(endereco))
-                .count();
-
-        System.out.println("O endereço foi adicionado");
-
-    }
-
-    public void adicionarTelefoneEmContatoExistente(Contatos contato) {
-        Telefone telefone = new Telefone("", "", TipoTelefone.CELULAR);
-
-        System.out.print("DIGITE O DDD: ");
-        telefone.setDdd(sc.nextLine().trim());
-
-        System.out.print("DIGITE O NUMERO: ");
-        telefone.setNumero(sc.nextLine().trim());
-
-        System.out.println("TIPO DE TELEFONE:  " + "(CELULAR, COMERCIAL, RESIDENCIAL)");
-        telefone.setTipo(sc.nextLine().toUpperCase().trim());
-
-
-        long quantidadeApagados = agenda.getContatos().stream()
-                .filter(cont -> cont.equals(contato))
-                .map(cont -> cont.getTelefones().add(telefone))
-                .count();
-
-        System.out.println("Foi adicionado " + quantidadeApagados + " telefone");
-
-
-    }
-
-    public void exibirTodasInformacoesTelefone(Contatos contatos){
+    public void exibirTodasInformacoesTelefone(Contatos contatos){ //letra m
         System.out.println("\nTodas informações do telefones: ");
         contatos.getTelefones().stream().forEach(telefone -> {
             Integer id = contatos.getTelefones().indexOf(telefone);
@@ -362,7 +419,7 @@ public class AgendaController {
         });
 
     }
-    public void exibirTodasInformacoesEndereco(Contatos contatos){
+    public void exibirTodasInformacoesEndereco(Contatos contatos){ //letra n
         System.out.println("\nEndereços: \n");
         contatos.getEnderecos().stream().forEach(endereco -> {
             Integer id = contatos.getEnderecos().indexOf(endereco);

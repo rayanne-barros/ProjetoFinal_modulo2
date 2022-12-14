@@ -25,6 +25,14 @@ public class Agenda {
         contatos.add(contato);
     }
 
+    public void addTelefones(Telefone telefone) {
+        telefones.add(telefone);
+    }
+
+    public void addEnderecos(Endereco endereco) {
+        enderecos.add(endereco);
+    }
+
     public void removerContato(Contatos contato) {
         this.contatos.remove(contato);
     }

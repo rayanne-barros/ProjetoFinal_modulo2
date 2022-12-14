@@ -2,6 +2,8 @@ package agendaContatos.model;
 
 import agendaContatos.enums.TipoEndereco;
 
+import java.util.Objects;
+
 public class Endereco {
     private TipoEndereco tipo;
     private String pais;
@@ -71,16 +73,27 @@ public class Endereco {
         this.estado = estado;
     }
 
-    public String getEnderecoCompleto() {
-        String valor = logradouro;
-        if (!numero.isBlank() && !cidade.isBlank()) {
-            valor += "," + numero;
-        }
-        return valor.trim();
+//    public String getEnderecoCompleto() {
+//        String valor = logradouro;
+//        if (!numero.isBlank() && !cidade.isBlank()) {
+//            valor += "," + numero;
+//        }
+//        return valor.trim();
+//
+//    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Endereco endereco = (Endereco) o;
+        return Objects.equals(logradouro, endereco.logradouro) && Objects.equals(numero, endereco.numero);
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(logradouro, numero);
+    }
 
     @Override
     public String toString() { return  logradouro + ", N: "  +  numero + ". " + cidade +  "-" + estado; }
