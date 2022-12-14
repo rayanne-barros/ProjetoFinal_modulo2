@@ -7,6 +7,7 @@ import agendaContatos.model.Agenda;
 import agendaContatos.model.Contatos;
 import agendaContatos.model.Endereco;
 import agendaContatos.model.Telefone;
+import agendaContatos.ui.AgendaUI;
 import agendaContatos.util.ConsoleUIHelper;
 
 import java.util.ArrayList;
@@ -274,11 +275,18 @@ public class AgendaController {
         });
     }
     public void listarTodosTelefonesContato(Contatos contato) {
+        AgendaUI view = new AgendaUI();
         contato.getTelefones().forEach(telefone -> {
             Integer id = contato.getTelefones().indexOf(telefone);
             System.out.println("\nIDENTIFICADOR: " + id);
             System.out.println("Telefone: " + telefone.getTelefoneCompleto());
         });
+        /*System.out.println("Escolha um Telefone pelo identificador para exibir todas informações? ");
+        System.out.print(">>> ");
+        int opcao = sc.nextInt();
+        sc.nextLine();
+
+        exibirTodasInformacoesTelefone(contato);*/
     }
 
     public void listarTodosEnderecosContato(Contatos contato) {
@@ -343,5 +351,30 @@ public class AgendaController {
 
 
     }
+
+    public void exibirTodasInformacoesTelefone(Contatos contatos){
+        System.out.println("\nTodas informações do telefones: ");
+        contatos.getTelefones().stream().forEach(telefone -> {
+            Integer id = contatos.getTelefones().indexOf(telefone);
+            System.out.println("\nIDENTIFICADOR: " + id);
+            System.out.println("TELEFONE: " + telefone.getDdd() + " " + telefone.getNumero() );
+            System.out.println("TIPO DE TELEFONE: " + telefone.getTipo());
+        });
+
+    }
+    public void exibirTodasInformacoesEndereco(Contatos contatos){
+        System.out.println("\nEndereços: \n");
+        contatos.getEnderecos().stream().forEach(endereco -> {
+            Integer id = contatos.getEnderecos().indexOf(endereco);
+            System.out.println("\nIDENTIFICADOR: " + id);
+            System.out.println("RUA: " + endereco.getLogradouro());
+            System.out.println("NÚMERO: " + endereco.getNumero());
+            System.out.println("CEP: " + endereco.getCep());
+            System.out.println("MUNICIPIO: " + endereco.getCidade() + " - " + endereco.getEstado());
+            System.out.println("TIPO DE ENDEREÇO: " + endereco.getTipo());
+            System.out.println();
+        });
+    }
+
 
 }
