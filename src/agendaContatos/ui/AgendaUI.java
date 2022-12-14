@@ -15,12 +15,15 @@ public class AgendaUI {
         Boolean continuar = true;
 
         do {
-            System.out.println("Digite a opção que você deseja: ");
-            System.out.println("1 - Adicionar Contato");
-            System.out.println("2 - Listar contatos");
-            System.out.println("3 - Buscar Contato");
-            System.out.println("4 - Remover todos os contatos");
-            System.out.println("0 - Sair do Programa ");
+            System.out.print("""
+                    Digite a opção que você deseja: 
+                    
+                    1 - Adicionar Contato
+                    2 - Listar contatos
+                    3 - Buscar Contato
+                    4 - Remover todos os contatos
+                    0 - Sair do Programa                    
+                    """);
 
             String opcao = sc.nextLine();
 
@@ -65,16 +68,22 @@ public class AgendaUI {
     }
 
     public void subMenu(Contatos contato) {
-        System.out.println("Escolha uma opção para realizar no contato " + contato.getNome() + " " + contato.getSobrenome() + ":");
-        System.out.println("1 - Excluir contato.");
-     //   System.out.println("2 - Adicionar um telefone.");
-     //   System.out.println("3 - Adicionar um endereço.");
-        System.out.println("4 - Remover um telefone.");
-        System.out.println("5 - Remover um endereço.");
-        System.out.println("6 - Exibir todas as informações do contato.");
-        System.out.println("7 - Listar todos os telefones do contato.");
-        System.out.println("8 - Listar todos os endereços do contato.");
-        System.out.println("0 - Voltar ao menu.");
+
+        System.out.print("Escolha uma opção para realizar no contato " + contato.getNome() + " " + contato.getSobrenome() + ": ");
+        System.out.println("""                
+                                
+                1 - Excluir contato
+                2 - Adicionar um telefone
+                3 - Adicionar um endereço
+                4 - Remover um telefone
+                5 - Remover um endereço
+                6 - Exibir todas as informações do contato
+                7 - Listar todos os telefones do contato
+                8 - Listar todos os endereços do contato
+                0 - Voltar ao menu
+                """);
+
+
       /*
 
       "Exibir todas as informações de telefone e endereço" não é uma escolha no menu. Motivo: ao listar o telefone já mostrar todos os índices,
@@ -85,17 +94,15 @@ public class AgendaUI {
       System.out.println("2 - Exibir todas as informações de um endereço de um contato da agenda");
 
        */
-
-
         String escolha = sc.nextLine();
 
         switch (escolha) {
             case "1" -> excluirContato(contato);
-           // case "2" -> adicionarTelefoneContato(contato);
-           // case "3" -> adicionarEnderecoContato(contato);
+            case "2" -> adicionarTelefoneContato(contato);
+            case "3" -> adicionarEnderecoContato(contato);
             case "4" -> removerTelefoneContato(contato);
             case "5" -> removerEnderecoContato(contato);
-           case "6" -> exibirInformacoesContato(contato);
+            case "6" -> exibirInformacoesContato(contato);
             case "7" -> listarTodosTelefonesContato(contato);
             case "8" -> listarTodosEnderecosContato(contato);
             case "0" -> mostrarMenu();
@@ -106,18 +113,22 @@ public class AgendaUI {
         controller.excluirContato(contato);
     }
 
-    /*
     public void adicionarTelefoneContato(Contatos contato) {
+        controller.adicionarTelefoneEmContatoExistente(contato);
+    }
+
+    public void adicionarEnderecoContato(Contatos contato) {
+        controller.adicionarEnderecoContatoExistente(contato);
+    }
+
+  /*  public void adicionarTelefoneContato(Contatos contato) {
         controller.adicionarTelefoneContato(contato);
     }
 
-     */
 
-    /*
     public void adicionarEnderecoContato(Contatos contato) {
         controller.adicionarEnderecoContato(contato);
-    }
-     */
+    }*/
 
     public void removerTelefoneContato(Contatos contato) {
         controller.removerTelefoneContato(contato);
