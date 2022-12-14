@@ -15,12 +15,14 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class AgendaController {
-
+    int width = 85;
     Scanner sc = new Scanner(System.in);
 
     private Agenda agenda = new Agenda();
 
     public void adicionarContato() {
+        ConsoleUIHelper.drawLine(width);
+
         Contatos contato = new Contatos("", "", TipoContato.PESSOAL);
 
         System.out.print("\nDIGITE O NOME DO CONTATO: ");
@@ -34,6 +36,8 @@ public class AgendaController {
 
         contato.setTelefones(mostrarMenuCadastroTelefone());
         contato.setEnderecos(mostrarMenuCadastroEndereco());
+
+        ConsoleUIHelper.drawLine(width);
 
         /* Implementando a Regra de negócio
          */
@@ -95,7 +99,7 @@ public class AgendaController {
         List<Endereco> enderecos = new ArrayList<>();
 
         do {
-            System.out.println("\nDESEJA ADICIONAR ENDEREÇO? \n");
+            System.out.println("\nDESEJA ADICIONAR ENDEREÇO?");
 
             System.out.println("1-  SIM");
             System.out.println("0 - NÃO");
@@ -136,7 +140,7 @@ public class AgendaController {
 
 
     public Contatos listarContatos() {
-        System.out.println("Contatos cadastrados: ");
+        System.out.println("Contatos cadastrados: \n");
 
         for (int i = 0; i < agenda.getContatos().size(); i++) {
             System.out.println("Identificador: " + i + ". Nome: " + agenda.getContatos().get(i).getNome().toUpperCase() + " " + agenda.getContatos().get(i).getSobrenome().toUpperCase());
@@ -146,7 +150,7 @@ public class AgendaController {
         String escolha = sc.nextLine();
         Contatos contato = agenda.getContatos().get(Integer.valueOf(escolha));
 
-        System.out.println("O contato escolhido foi " + contato.getNome() + " " + contato.getSobrenome() + ".");
+        System.out.println("\nO contato escolhido foi " + contato.getNome() + " " + contato.getSobrenome() + ".\n");
 
         return contato;
     }
@@ -166,7 +170,7 @@ public class AgendaController {
         String escolha = sc.nextLine();
         Contatos contato = cttEncontrados.get(Integer.valueOf(escolha));
 
-        System.out.println("O contato escolhido foi " + contato.getNome() + " " + contato.getSobrenome() + ".");
+        System.out.println("\nO contato escolhido foi " + contato.getNome() + " " + contato.getSobrenome() + ".");
 
         return contato;
     }
@@ -180,7 +184,7 @@ public class AgendaController {
                 .collect(Collectors.toList());
 
         if (contatosEncontrados.size() == 0) {
-            System.err.println("Contato não encontrado. ");
+            System.err.println("\nContato não encontrado.\n");
         }
         return contatosEncontrados;
     }
@@ -188,22 +192,29 @@ public class AgendaController {
     public Boolean excluirTodosContatos() {
         Boolean mostrarMenu = true;
 
-        System.out.println("Você tem certeza que deseja excluir todos os contatos? (0 - Não / 1 - Sim)");
-        String opcaoNaoSim = sc.nextLine();
+      //  System.out.println("Você tem certeza que deseja excluir todos os contatos? (0 - Não / 1 - Sim)");
+        String opcaoNaoSim = ConsoleUIHelper.askSimpleInput("Você tem certeza que deseja excluir todos os contatos? (0 - Não / 1 - Sim)");
+        opcaoNaoSim = sc.nextLine();
         if (opcaoNaoSim.equals("0")) {
+            ConsoleUIHelper.drawLine(120);
             return mostrarMenu;
-        } else if (opcaoNaoSim.equals("1")) {
+        }
+        else if (opcaoNaoSim.equals("1")) {
             agenda.removerTodosContatos();
-            System.out.println("Todos os contatos foram excluídos!");
+            System.out.println("\nTodos os contatos foram excluídos!");
+            ConsoleUIHelper.drawLine(120);
             return mostrarMenu;
-        } else {
+        }
+        else {
             return mostrarMenu;
         }
     }
 
     public void excluirContato(Contatos contato) {
         agenda.removerContato(contato);
-        System.out.println("O contato " + contato.getNome() + " " + contato.getSobrenome() + "foi excluído.");
+        ConsoleUIHelper.askSimpleInput("\nO contato " + contato.getNome() + " " + contato.getSobrenome() + "foi excluído.\n");
+        //System.out.println("\nO contato " + contato.getNome() + " " + contato.getSobrenome() + "foi excluído.\n");
+        ConsoleUIHelper.drawLine(80);
     }
 
     public Telefone escolherTelefoneRemover(Contatos contato) {
@@ -226,7 +237,7 @@ public class AgendaController {
                 .map(cont -> cont.getTelefones().remove(telefone))
                 .count();
 
-        System.out.println("Foi/Foram apagado(s) " + quantidadeApagados + " telefone(s).");
+        System.out.println("\nFoi/Foram apagado(s) " + quantidadeApagados + " telefone(s).\n");
     }
 
     public Endereco escolherEnderecoRemover(Contatos contato) {
@@ -243,7 +254,7 @@ public class AgendaController {
     public void removerEnderecoContato(Contatos contato) { // 9
         Endereco endereco = escolherEnderecoRemover(contato);
         long quantidadeApagados = agenda.getContatos().stream().filter(cont -> cont.equals(contato)).map(cont -> cont.getEnderecos().remove(endereco)).count();
-        System.out.println("Foi/Foram apagado(s) " + quantidadeApagados + " endereço(s).");
+        System.out.println("\nFoi/Foram apagado(s) " + quantidadeApagados + " endereço(s).\n");
     }
 
     // Exibir todas as informações de um contato da agenda
@@ -317,7 +328,7 @@ public class AgendaController {
                 .map(cont -> cont.getEnderecos().add(endereco))
                 .count();
 
-        System.out.println("O endereço foi adicionado");
+        System.out.println("\nO endereço foi adicionado\n");
 
     }
 
@@ -339,7 +350,7 @@ public class AgendaController {
                 .map(cont -> cont.getTelefones().add(telefone))
                 .count();
 
-        System.out.println("Foi adicionado " + quantidadeApagados + " telefone");
+        System.out.println("\nFoi adicionado " + quantidadeApagados + " telefone\n");
 
 
     }

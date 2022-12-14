@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class Contatos {
+    /*private final int maxViewW;
+    private final int maxViewH;*/
     private String nome;
     private String sobrenome;
     private TipoContato tipo;
