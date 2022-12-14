@@ -150,7 +150,7 @@ public class AgendaUI {
 
     public void listarTodosTelefonesContato(Contatos contato) {
         controller.listarTodosTelefonesContato(contato);
-        controller.exibirTodasInformacoesTelefone(contato);
+
     }
 
     public void listarTodosEnderecosContato(Contatos contato) {
